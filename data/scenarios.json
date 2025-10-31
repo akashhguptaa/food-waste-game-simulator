@@ -1,0 +1,256 @@
+{
+  "scenarios": [
+    {
+      "id": 1,
+      "emoji": "🏃‍♂️",
+      "title": "The Marathon Dinner",
+      "setting": "You just ran <highlight>10 km</highlight> for a charity <marathon>🏃‍♂️ MARATHON</marathon> and you're <starving>STARVING</starving>! 😫",
+      "challenge": "The dinner buffet looks <amazing>AMAZING</amazing> — rice 🍚, curry 🍛, salad 🥗, dessert 🍫, and juice 🧃. How much should you <actually>actually</actually> take? 🤔",
+      "foods": [
+        {
+          "name": "Rice",
+          "emoji": "🍚",
+          "unit": "bowls",
+          "min": 0,
+          "max": 4,
+          "optimal": 2,
+          "step": 0.5
+        },
+        {
+          "name": "Curry",
+          "emoji": "🍛",
+          "unit": "bowls",
+          "min": 0,
+          "max": 4,
+          "optimal": 1.5,
+          "step": 0.5
+        },
+        {
+          "name": "Salad",
+          "emoji": "🥗",
+          "unit": "bowls",
+          "min": 0,
+          "max": 4,
+          "optimal": 1,
+          "step": 0.5
+        },
+        {
+          "name": "Brownie",
+          "emoji": "🍫",
+          "unit": "pieces",
+          "min": 0,
+          "max": 4,
+          "optimal": 1,
+          "step": 1
+        },
+        {
+          "name": "Juice",
+          "emoji": "🧃",
+          "unit": "glasses",
+          "min": 0,
+          "max": 4,
+          "optimal": 1,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "emoji": "📚",
+      "title": "The Study Marathon",
+      "setting": "You've been studying for <highlight>6 HOURS</highlight> straight for tomorrow's <exam>📝 TEST</exam> and your brain is <fried>FRIED</fried>! 🤯",
+      "challenge": "Your mom just brought snacks — chips 🍟, sandwich 🥪, smoothie 🥤, and fruits 🍎. Choose wisely, because your <brain>brain's tired</brain>, but your body isn't! 🧠",
+      "foods": [
+        {
+          "name": "Sandwich",
+          "emoji": "🥪",
+          "unit": "pieces",
+          "min": 0,
+          "max": 3,
+          "optimal": 1,
+          "step": 0.5
+        },
+        {
+          "name": "Smoothie",
+          "emoji": "🥤",
+          "unit": "glasses",
+          "min": 0,
+          "max": 3,
+          "optimal": 1,
+          "step": 1
+        },
+        {
+          "name": "Chips",
+          "emoji": "🍟",
+          "unit": "bowls",
+          "min": 0,
+          "max": 3,
+          "optimal": 0.5,
+          "step": 0.5
+        },
+        {
+          "name": "Fruits",
+          "emoji": "🍎",
+          "unit": "servings",
+          "min": 0,
+          "max": 4,
+          "optimal": 2,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "emoji": "🎬",
+      "title": "The Movie Night Feast",
+      "setting": "It's <friday>FRIDAY NIGHT</friday> 🎉 and your friends are over for a <movie>🎬 MOVIE MARATHON</movie>! Everyone's hyped! 🍿",
+      "challenge": "Everyone ordered pizza 🍕, popcorn 🍿, and soda 🥤 — but not everyone eats the same. Decide how much you'll take without <wasting>wasting food</wasting>! ♻️",
+      "foods": [
+        {
+          "name": "Pizza",
+          "emoji": "🍕",
+          "unit": "slices",
+          "min": 0,
+          "max": 8,
+          "optimal": 3,
+          "step": 1
+        },
+        {
+          "name": "Popcorn",
+          "emoji": "🍿",
+          "unit": "bowls",
+          "min": 0,
+          "max": 4,
+          "optimal": 1,
+          "step": 0.5
+        },
+        {
+          "name": "Soda",
+          "emoji": "🥤",
+          "unit": "glasses",
+          "min": 0,
+          "max": 4,
+          "optimal": 1,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "emoji": "🏔️",
+      "title": "The Mountain Adventure",
+      "setting": "You've been <hiking>HIKING</hiking> 🥾 up a hill since <morning>MORNING</morning> ☀️ and finally reach a <campfire>🔥 CAMPFIRE SITE</campfire>! Exhausted! 😮‍💨",
+      "challenge": "Dinner time! You have soup 🍲, bread 🍞, and roasted vegetables 🥕 to pick from. Don't waste — remember you <carried>CARRIED</carried> this food up the mountain! 🎒",
+      "foods": [
+        {
+          "name": "Soup",
+          "emoji": "🍲",
+          "unit": "bowls",
+          "min": 0,
+          "max": 3,
+          "optimal": 1.5,
+          "step": 0.5
+        },
+        {
+          "name": "Bread",
+          "emoji": "🍞",
+          "unit": "slices",
+          "min": 0,
+          "max": 6,
+          "optimal": 3,
+          "step": 1
+        },
+        {
+          "name": "Roasted Vegetables",
+          "emoji": "🥕",
+          "unit": "servings",
+          "min": 0,
+          "max": 4,
+          "optimal": 2,
+          "step": 0.5
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "emoji": "🎂",
+      "title": "The Birthday Bash",
+      "setting": "It's your <birthday>🎂 BIRTHDAY</birthday>! 🥳 You're at your favorite restaurant with friends and family. <celebration>TIME TO CELEBRATE</celebration>! 🎉",
+      "challenge": "Cake 🎂, pasta 🍝, ice cream 🍨, and juice 🧃 everywhere! Excitement can lead to <overordering>over-ordering</overordering> — make your plate <wisely>wisely</wisely>! 🤗",
+      "foods": [
+        {
+          "name": "Pasta",
+          "emoji": "🍝",
+          "unit": "bowls",
+          "min": 0,
+          "max": 3,
+          "optimal": 1,
+          "step": 0.5
+        },
+        {
+          "name": "Cake",
+          "emoji": "🎂",
+          "unit": "slices",
+          "min": 0,
+          "max": 4,
+          "optimal": 1,
+          "step": 1
+        },
+        {
+          "name": "Ice Cream",
+          "emoji": "🍨",
+          "unit": "scoops",
+          "min": 0,
+          "max": 5,
+          "optimal": 2,
+          "step": 1
+        },
+        {
+          "name": "Juice",
+          "emoji": "🧃",
+          "unit": "glasses",
+          "min": 0,
+          "max": 3,
+          "optimal": 1,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "emoji": "🛋️",
+      "title": "The Lazy Sunday",
+      "setting": "It's a <lazy>LAZY SUNDAY</lazy> afternoon ☁️. You've done <nothing>ABSOLUTELY NOTHING</nothing> all day. Just <chilling>CHILLING</chilling>! 😴",
+      "challenge": "You're about to order lunch — burger 🍔, fries 🍟, and milkshake 🥤. Do you <really>really</really> need all that, or just something <light>light</light>? 🤔",
+      "foods": [
+        {
+          "name": "Burger",
+          "emoji": "🍔",
+          "unit": "pieces",
+          "min": 0,
+          "max": 3,
+          "optimal": 1,
+          "step": 1
+        },
+        {
+          "name": "Fries",
+          "emoji": "🍟",
+          "unit": "servings",
+          "min": 0,
+          "max": 3,
+          "optimal": 0.5,
+          "step": 0.5
+        },
+        {
+          "name": "Milkshake",
+          "emoji": "🥤",
+          "unit": "glasses",
+          "min": 0,
+          "max": 2,
+          "optimal": 0,
+          "step": 1
+        }
+      ]
+    }
+  ]
+}

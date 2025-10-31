@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export default function ScenarioPage() {
   const [playerData, setPlayerData] = useState<any>(null);
 
   useEffect(() => {
     // Get player data from localStorage
-    const data = localStorage.getItem('playerData');
+    const data = localStorage.getItem("playerData");
     if (data) {
       setPlayerData(JSON.parse(data));
     }
@@ -70,19 +70,20 @@ export default function ScenarioPage() {
                 transition={{ delay: 0.2 }}
                 className="text-center mb-10"
               >
-                <motion.h1 
+                <motion.h1
                   className="text-5xl md:text-7xl font-black mb-2"
                   style={{
-                    color: '#d4a574',
-                    textShadow: '0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8), -1px -1px 0 #8b6f47, 1px 1px 0 #f4d5a4',
-                    letterSpacing: '0.05em'
+                    color: "#d4a574",
+                    textShadow:
+                      "0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8), -1px -1px 0 #8b6f47, 1px 1px 0 #f4d5a4",
+                    letterSpacing: "0.05em",
                   }}
                   animate={{
                     textShadow: [
-                      '0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8)',
-                      '0 0 20px rgba(212,165,116,0.7), 0 0 30px rgba(212,165,116,0.5), 2px 2px 4px rgba(0,0,0,0.8)',
-                      '0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8)',
-                    ]
+                      "0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8)",
+                      "0 0 20px rgba(212,165,116,0.7), 0 0 30px rgba(212,165,116,0.5), 2px 2px 4px rgba(0,0,0,0.8)",
+                      "0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8)",
+                    ],
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
@@ -112,15 +113,21 @@ export default function ScenarioPage() {
                     </div>
                     <div>
                       <p className="text-white/60 text-sm uppercase">Weight</p>
-                      <p className="text-white font-bold">{playerData.weight} kg</p>
+                      <p className="text-white font-bold">
+                        {playerData.weight} kg
+                      </p>
                     </div>
                     <div>
                       <p className="text-white/60 text-sm uppercase">Height</p>
-                      <p className="text-white font-bold">{playerData.height} cm</p>
+                      <p className="text-white font-bold">
+                        {playerData.height} cm
+                      </p>
                     </div>
                     <div>
                       <p className="text-white/60 text-sm uppercase">Gender</p>
-                      <p className="text-white font-bold capitalize">{playerData.gender}</p>
+                      <p className="text-white font-bold capitalize">
+                        {playerData.gender}
+                      </p>
                     </div>
                   </div>
                 </motion.div>
@@ -141,14 +148,15 @@ export default function ScenarioPage() {
                     🎮
                   </motion.span>
                 </div>
-                
+
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                  Welcome to the Game, {playerData?.name || 'Player'}!
+                  Welcome to the Game, {playerData?.name || "Player"}!
                 </h2>
-                
+
                 <p className="text-xl text-white/80 max-w-2xl mx-auto">
-                  Get ready to test your portion estimation skills. We'll show you various foods, 
-                  and you'll need to guess their portion sizes based on your nutritional knowledge!
+                  Get ready to test your portion estimation skills. We'll show
+                  you various foods, and you'll need to guess their portion
+                  sizes based on your nutritional knowledge!
                 </p>
 
                 <div className="flex flex-wrap justify-center gap-4 text-5xl mt-8">
@@ -186,21 +194,25 @@ export default function ScenarioPage() {
 
                 {/* Continue Button */}
                 <motion.button
+                  onClick={() => (window.location.href = "/scenerio/1")}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="mt-8 px-12 py-5 bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 text-white font-black text-xl rounded-xl shadow-lg relative overflow-hidden"
+                  className="mt-8 px-12 py-5 bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 text-white font-black text-xl rounded-xl shadow-lg relative overflow-hidden cursor-pointer"
                   style={{
-                    boxShadow: '0 0 30px rgba(6, 182, 212, 0.6), 0 0 60px rgba(6, 182, 212, 0.3)'
+                    boxShadow:
+                      "0 0 30px rgba(6, 182, 212, 0.6), 0 0 60px rgba(6, 182, 212, 0.3)",
                   }}
                 >
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                    animate={{ x: ['-100%', '100%'] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                    animate={{ x: ["-100%", "100%"] }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
                   />
-                  <span className="relative z-10">
-                    CONTINUE TO GAME
-                  </span>
+                  <span className="relative z-10">CONTINUE TO GAME</span>
                 </motion.button>
               </motion.div>
             </div>
@@ -211,9 +223,9 @@ export default function ScenarioPage() {
       {/* Floating Food Decorations */}
       <motion.div
         className="absolute top-12 left-12 text-7xl z-20 drop-shadow-2xl"
-        animate={{ 
+        animate={{
           y: [0, -20, 0],
-          rotate: [-5, 5, -5]
+          rotate: [-5, 5, -5],
         }}
         transition={{ duration: 4, repeat: Infinity }}
       >
@@ -222,9 +234,9 @@ export default function ScenarioPage() {
 
       <motion.div
         className="absolute top-12 right-12 text-7xl z-20 drop-shadow-2xl"
-        animate={{ 
+        animate={{
           y: [0, -15, 0],
-          rotate: [5, -5, 5]
+          rotate: [5, -5, 5],
         }}
         transition={{ duration: 3.5, repeat: Infinity, delay: 0.5 }}
       >
@@ -233,9 +245,9 @@ export default function ScenarioPage() {
 
       <motion.div
         className="absolute bottom-20 left-8 text-8xl z-20 drop-shadow-2xl"
-        animate={{ 
+        animate={{
           y: [0, -12, 0],
-          rotate: [-3, 3, -3]
+          rotate: [-3, 3, -3],
         }}
         transition={{ duration: 3.8, repeat: Infinity, delay: 0.3 }}
       >
@@ -244,9 +256,9 @@ export default function ScenarioPage() {
 
       <motion.div
         className="absolute bottom-20 right-12 text-8xl z-20 drop-shadow-2xl"
-        animate={{ 
+        animate={{
           y: [0, -18, 0],
-          rotate: [3, -3, 3]
+          rotate: [3, -3, 3],
         }}
         transition={{ duration: 3.6, repeat: Infinity, delay: 0.2 }}
       >

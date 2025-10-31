@@ -1,44 +1,57 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function InitialPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    name: '',
-    age: '',
-    weight: '',
-    height: '',
-    gender: ''
+    name: "",
+    age: "",
+    weight: "",
+    height: "",
+    gender: "",
   });
   const [isStarting, setIsStarting] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleStart = () => {
-    if (formData.name && formData.age && formData.weight && formData.height && formData.gender) {
+    if (
+      formData.name &&
+      formData.age &&
+      formData.weight &&
+      formData.height &&
+      formData.gender
+    ) {
       setIsStarting(true);
       // Store form data in localStorage
-      localStorage.setItem('playerData', JSON.stringify(formData));
+      localStorage.setItem("playerData", JSON.stringify(formData));
       // Navigate to scenario page
       setTimeout(() => {
-        router.push('/scenerio');
+        router.push("/scenerio");
       }, 1000);
     }
   };
 
-  const isFormValid = formData.name && formData.age && formData.weight && formData.height && formData.gender;
+  const isFormValid =
+    formData.name &&
+    formData.age &&
+    formData.weight &&
+    formData.height &&
+    formData.gender;
 
   // Particle system for space dust
   const particles = Array.from({ length: 50 });
-  
+
   return (
     <div className="relative min-h-screen bg-[#0a0e27] overflow-hidden flex items-center justify-center p-4">
       {/* Space Background with Stars */}
@@ -70,9 +83,9 @@ export default function InitialPage() {
       {/* Floating Food Decorations - Top Left */}
       <motion.div
         className="absolute top-8 left-8 text-8xl z-20 drop-shadow-2xl"
-        animate={{ 
+        animate={{
           y: [0, -20, 0],
-          rotate: [-5, 5, -5]
+          rotate: [-5, 5, -5],
         }}
         transition={{ duration: 4, repeat: Infinity }}
       >
@@ -82,9 +95,9 @@ export default function InitialPage() {
       {/* Floating Food Decorations - Top Right */}
       <motion.div
         className="absolute top-12 right-12 text-7xl z-20 drop-shadow-2xl"
-        animate={{ 
+        animate={{
           y: [0, -15, 0],
-          rotate: [5, -5, 5]
+          rotate: [5, -5, 5],
         }}
         transition={{ duration: 3.5, repeat: Infinity, delay: 0.5 }}
       >
@@ -94,9 +107,9 @@ export default function InitialPage() {
       {/* Avocado - Left Side */}
       <motion.div
         className="absolute top-1/3 left-4 text-7xl z-20 drop-shadow-2xl"
-        animate={{ 
+        animate={{
           y: [0, -10, 0],
-          rotate: [0, 10, 0]
+          rotate: [0, 10, 0],
         }}
         transition={{ duration: 3, repeat: Infinity }}
       >
@@ -106,9 +119,9 @@ export default function InitialPage() {
       {/* Meat - Bottom Left */}
       <motion.div
         className="absolute bottom-20 left-8 text-9xl z-20 drop-shadow-2xl"
-        animate={{ 
+        animate={{
           y: [0, -12, 0],
-          rotate: [-3, 3, -3]
+          rotate: [-3, 3, -3],
         }}
         transition={{ duration: 3.8, repeat: Infinity, delay: 0.3 }}
       >
@@ -143,37 +156,39 @@ export default function InitialPage() {
                 transition={{ delay: 0.2 }}
                 className="text-center mb-10 relative"
               >
-                <motion.h1 
+                <motion.h1
                   className="text-5xl md:text-7xl font-black mb-2 relative"
                   style={{
-                    color: '#d4a574',
-                    textShadow: '0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8), -1px -1px 0 #8b6f47, 1px 1px 0 #f4d5a4',
-                    letterSpacing: '0.05em'
+                    color: "#d4a574",
+                    textShadow:
+                      "0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8), -1px -1px 0 #8b6f47, 1px 1px 0 #f4d5a4",
+                    letterSpacing: "0.05em",
                   }}
                   animate={{
                     textShadow: [
-                      '0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8)',
-                      '0 0 20px rgba(212,165,116,0.7), 0 0 30px rgba(212,165,116,0.5), 2px 2px 4px rgba(0,0,0,0.8)',
-                      '0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8)',
-                    ]
+                      "0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8)",
+                      "0 0 20px rgba(212,165,116,0.7), 0 0 30px rgba(212,165,116,0.5), 2px 2px 4px rgba(0,0,0,0.8)",
+                      "0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8)",
+                    ],
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
                   PORTION
                 </motion.h1>
-                <motion.h1 
+                <motion.h1
                   className="text-5xl md:text-7xl font-black relative"
                   style={{
-                    color: '#d4a574',
-                    textShadow: '0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8), -1px -1px 0 #8b6f47, 1px 1px 0 #f4d5a4',
-                    letterSpacing: '0.05em'
+                    color: "#d4a574",
+                    textShadow:
+                      "0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8), -1px -1px 0 #8b6f47, 1px 1px 0 #f4d5a4",
+                    letterSpacing: "0.05em",
                   }}
                   animate={{
                     textShadow: [
-                      '0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8)',
-                      '0 0 20px rgba(212,165,116,0.7), 0 0 30px rgba(212,165,116,0.5), 2px 2px 4px rgba(0,0,0,0.8)',
-                      '0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8)',
-                    ]
+                      "0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8)",
+                      "0 0 20px rgba(212,165,116,0.7), 0 0 30px rgba(212,165,116,0.5), 2px 2px 4px rgba(0,0,0,0.8)",
+                      "0 0 10px rgba(212,165,116,0.5), 0 0 20px rgba(212,165,116,0.3), 2px 2px 4px rgba(0,0,0,0.8)",
+                    ],
                   }}
                   transition={{ duration: 2, repeat: Infinity, delay: 0.1 }}
                 >
@@ -304,7 +319,11 @@ export default function InitialPage() {
                     <motion.div
                       className="absolute right-2 top-1/2 -translate-y-1/2 text-2xl"
                       animate={{ y: [-2, 2, -2] }}
-                      transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        delay: 0.5,
+                      }}
                     >
                       💜
                     </motion.div>
@@ -361,28 +380,34 @@ export default function InitialPage() {
                   whileTap={isFormValid ? { scale: 0.98 } : {}}
                   className={`w-full py-5 rounded-xl font-black text-xl md:text-2xl transition-all relative overflow-hidden shadow-lg ${
                     isFormValid
-                      ? 'bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 text-white cursor-pointer'
-                      : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                      ? "bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 text-white cursor-pointer"
+                      : "bg-gray-600 text-gray-400 cursor-not-allowed"
                   }`}
                   style={{
-                    boxShadow: isFormValid ? '0 0 30px rgba(6, 182, 212, 0.6), 0 0 60px rgba(6, 182, 212, 0.3)' : 'none'
+                    boxShadow: isFormValid
+                      ? "0 0 30px rgba(6, 182, 212, 0.6), 0 0 60px rgba(6, 182, 212, 0.3)"
+                      : "none",
                   }}
                 >
                   {isFormValid && (
                     <>
                       <motion.div
                         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                        animate={{ x: ['-100%', '100%'] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                        animate={{ x: ["-100%", "100%"] }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
                       />
                       <motion.div
                         className="absolute inset-0"
                         animate={{
                           boxShadow: [
-                            '0 0 20px rgba(6, 182, 212, 0.4)',
-                            '0 0 40px rgba(6, 182, 212, 0.8)',
-                            '0 0 20px rgba(6, 182, 212, 0.4)'
-                          ]
+                            "0 0 20px rgba(6, 182, 212, 0.4)",
+                            "0 0 40px rgba(6, 182, 212, 0.8)",
+                            "0 0 20px rgba(6, 182, 212, 0.4)",
+                          ],
                         }}
                         transition={{ duration: 1.5, repeat: Infinity }}
                       />
@@ -395,7 +420,7 @@ export default function InitialPage() {
                     >
                       👆
                     </motion.span>
-                    {isStarting ? 'LOADING...' : 'START YOUR QUEST!'}
+                    {isStarting ? "LOADING..." : "START YOUR QUEST!"}
                   </span>
                 </motion.button>
               </motion.div>
@@ -416,11 +441,11 @@ export default function InitialPage() {
                     <motion.div
                       key={i}
                       className="w-1 bg-green-400 rounded-full"
-                      animate={{ height: ['8px', '16px', '8px'] }}
+                      animate={{ height: ["8px", "16px", "8px"] }}
                       transition={{
                         duration: 0.8,
                         repeat: Infinity,
-                        delay: i * 0.1
+                        delay: i * 0.1,
                       }}
                     />
                   ))}
@@ -437,9 +462,9 @@ export default function InitialPage() {
       {/* More Food Decorations - Right Side */}
       <motion.div
         className="absolute top-1/2 right-8 text-7xl z-20 drop-shadow-2xl"
-        animate={{ 
+        animate={{
           y: [0, -15, 0],
-          rotate: [-5, 5, -5]
+          rotate: [-5, 5, -5],
         }}
         transition={{ duration: 3.2, repeat: Infinity, delay: 0.7 }}
       >
@@ -448,9 +473,9 @@ export default function InitialPage() {
 
       <motion.div
         className="absolute bottom-32 right-12 text-8xl z-20 drop-shadow-2xl"
-        animate={{ 
+        animate={{
           y: [0, -18, 0],
-          rotate: [3, -3, 3]
+          rotate: [3, -3, 3],
         }}
         transition={{ duration: 3.6, repeat: Infinity, delay: 0.2 }}
       >
