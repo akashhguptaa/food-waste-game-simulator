@@ -24,213 +24,228 @@ type Scenario = {
   foods: FoodItem[];
 };
 
-const parseStyledText = (text: string) => {
-  // Parse custom tags for styling
+const StyledText = ({ text }: { text: string }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <span className="italic">{text}</span>;
+  }
+
   const parts = text.split(/(<[^>]+>[^<]*<\/[^>]+>)/g);
 
-  return parts.map((part, index) => {
-    if (part.includes("<highlight>")) {
-      const content = part.replace(/<\/?highlight>/g, "");
-      return (
-        <span
-          key={index}
-          className="text-yellow-300 font-bold text-xl animate-pulse"
-        >
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<marathon>")) {
-      const content = part.replace(/<\/?marathon>/g, "");
-      return (
-        <span key={index} className="text-orange-400 font-black text-xl">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<starving>")) {
-      const content = part.replace(/<\/?starving>/g, "");
-      return (
-        <span key={index} className="text-red-400 font-bold text-lg">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<amazing>")) {
-      const content = part.replace(/<\/?amazing>/g, "");
-      return (
-        <span key={index} className="text-green-300 font-bold">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<actually>")) {
-      const content = part.replace(/<\/?actually>/g, "");
-      return (
-        <span key={index} className="text-cyan-300 font-bold text-lg">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<exam>")) {
-      const content = part.replace(/<\/?exam>/g, "");
-      return (
-        <span key={index} className="text-purple-400 font-black text-xl">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<fried>")) {
-      const content = part.replace(/<\/?fried>/g, "");
-      return (
-        <span key={index} className="text-red-400 font-bold text-lg">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<brain>")) {
-      const content = part.replace(/<\/?brain>/g, "");
-      return (
-        <span key={index} className="text-pink-400 font-semibold">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<friday>")) {
-      const content = part.replace(/<\/?friday>/g, "");
-      return (
-        <span key={index} className="text-yellow-300 font-bold text-xl">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<movie>")) {
-      const content = part.replace(/<\/?movie>/g, "");
-      return (
-        <span key={index} className="text-purple-400 font-black text-xl">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<wasting>")) {
-      const content = part.replace(/<\/?wasting>/g, "");
-      return (
-        <span key={index} className="text-red-400 font-bold">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<hiking>")) {
-      const content = part.replace(/<\/?hiking>/g, "");
-      return (
-        <span key={index} className="text-green-400 font-black text-xl">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<morning>")) {
-      const content = part.replace(/<\/?morning>/g, "");
-      return (
-        <span key={index} className="text-yellow-300 font-bold">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<campfire>")) {
-      const content = part.replace(/<\/?campfire>/g, "");
-      return (
-        <span key={index} className="text-orange-400 font-black text-xl">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<carried>")) {
-      const content = part.replace(/<\/?carried>/g, "");
-      return (
-        <span key={index} className="text-red-400 font-bold text-lg">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<birthday>")) {
-      const content = part.replace(/<\/?birthday>/g, "");
-      return (
-        <span key={index} className="text-pink-400 font-black text-xl">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<celebration>")) {
-      const content = part.replace(/<\/?celebration>/g, "");
-      return (
-        <span key={index} className="text-yellow-300 font-bold text-lg">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<overordering>")) {
-      const content = part.replace(/<\/?overordering>/g, "");
-      return (
-        <span key={index} className="text-red-400 font-bold">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<wisely>")) {
-      const content = part.replace(/<\/?wisely>/g, "");
-      return (
-        <span key={index} className="text-cyan-300 font-bold text-lg">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<lazy>")) {
-      const content = part.replace(/<\/?lazy>/g, "");
-      return (
-        <span key={index} className="text-blue-300 font-black text-xl">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<nothing>")) {
-      const content = part.replace(/<\/?nothing>/g, "");
-      return (
-        <span key={index} className="text-gray-400 font-bold text-lg">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<chilling>")) {
-      const content = part.replace(/<\/?chilling>/g, "");
-      return (
-        <span key={index} className="text-green-300 font-semibold">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<really>")) {
-      const content = part.replace(/<\/?really>/g, "");
-      return (
-        <span key={index} className="text-yellow-300 font-bold text-lg">
-          {content}
-        </span>
-      );
-    }
-    if (part.includes("<light>")) {
-      const content = part.replace(/<\/?light>/g, "");
-      return (
-        <span key={index} className="text-green-300 font-semibold">
-          {content}
-        </span>
-      );
-    }
+  return (
+    <>
+      {parts.map((part, index) => {
+        const key = `${part.substring(0, 20)}-${index}`;
 
-    return (
-      <span key={index} className="italic">
-        {part}
-      </span>
-    );
-  });
+        if (part.includes("<highlight>")) {
+          const content = part.replace(/<\/?highlight>/g, "");
+          return (
+            <span
+              key={key}
+              className="text-yellow-300 font-bold text-xl animate-pulse"
+            >
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<marathon>")) {
+          const content = part.replace(/<\/?marathon>/g, "");
+          return (
+            <span key={key} className="text-orange-400 font-black text-xl">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<starving>")) {
+          const content = part.replace(/<\/?starving>/g, "");
+          return (
+            <span key={key} className="text-red-400 font-bold text-lg">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<amazing>")) {
+          const content = part.replace(/<\/?amazing>/g, "");
+          return (
+            <span key={key} className="text-green-300 font-bold">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<actually>")) {
+          const content = part.replace(/<\/?actually>/g, "");
+          return (
+            <span key={key} className="text-cyan-300 font-bold text-lg">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<exam>")) {
+          const content = part.replace(/<\/?exam>/g, "");
+          return (
+            <span key={key} className="text-purple-400 font-black text-xl">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<fried>")) {
+          const content = part.replace(/<\/?fried>/g, "");
+          return (
+            <span key={key} className="text-red-400 font-bold text-lg">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<brain>")) {
+          const content = part.replace(/<\/?brain>/g, "");
+          return (
+            <span key={key} className="text-pink-400 font-semibold">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<friday>")) {
+          const content = part.replace(/<\/?friday>/g, "");
+          return (
+            <span key={key} className="text-yellow-300 font-bold text-xl">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<movie>")) {
+          const content = part.replace(/<\/?movie>/g, "");
+          return (
+            <span key={key} className="text-purple-400 font-black text-xl">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<wasting>")) {
+          const content = part.replace(/<\/?wasting>/g, "");
+          return (
+            <span key={key} className="text-red-400 font-bold">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<hiking>")) {
+          const content = part.replace(/<\/?hiking>/g, "");
+          return (
+            <span key={key} className="text-green-400 font-black text-xl">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<morning>")) {
+          const content = part.replace(/<\/?morning>/g, "");
+          return (
+            <span key={key} className="text-yellow-300 font-bold">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<campfire>")) {
+          const content = part.replace(/<\/?campfire>/g, "");
+          return (
+            <span key={key} className="text-orange-400 font-black text-xl">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<carried>")) {
+          const content = part.replace(/<\/?carried>/g, "");
+          return (
+            <span key={key} className="text-red-400 font-bold text-lg">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<birthday>")) {
+          const content = part.replace(/<\/?birthday>/g, "");
+          return (
+            <span key={key} className="text-pink-400 font-black text-xl">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<celebration>")) {
+          const content = part.replace(/<\/?celebration>/g, "");
+          return (
+            <span key={key} className="text-yellow-300 font-bold text-lg">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<overordering>")) {
+          const content = part.replace(/<\/?overordering>/g, "");
+          return (
+            <span key={key} className="text-red-400 font-bold">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<wisely>")) {
+          const content = part.replace(/<\/?wisely>/g, "");
+          return (
+            <span key={key} className="text-cyan-300 font-bold text-lg">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<lazy>")) {
+          const content = part.replace(/<\/?lazy>/g, "");
+          return (
+            <span key={key} className="text-blue-300 font-black text-xl">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<nothing>")) {
+          const content = part.replace(/<\/?nothing>/g, "");
+          return (
+            <span key={key} className="text-gray-400 font-bold text-lg">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<chilling>")) {
+          const content = part.replace(/<\/?chilling>/g, "");
+          return (
+            <span key={key} className="text-green-300 font-semibold">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<really>")) {
+          const content = part.replace(/<\/?really>/g, "");
+          return (
+            <span key={key} className="text-yellow-300 font-bold text-lg">
+              {content}
+            </span>
+          );
+        }
+        if (part.includes("<light>")) {
+          const content = part.replace(/<\/?light>/g, "");
+          return (
+            <span key={key} className="text-green-300 font-semibold">
+              {content}
+            </span>
+          );
+        }
+
+        return (
+          <span key={key} className="italic">
+            {part}
+          </span>
+        );
+      })}
+    </>
+  );
 };
 
 export default function ScenarioGamePage() {
@@ -417,7 +432,7 @@ export default function ScenarioGamePage() {
                           <span className="text-cyan-400 font-black text-lg">
                             Setting:
                           </span>{" "}
-                          {parseStyledText(scenario.setting)}
+                          <StyledText text={scenario.setting} />
                         </p>
                       </div>
 
@@ -426,7 +441,7 @@ export default function ScenarioGamePage() {
                           <span className="text-orange-300 font-black text-lg">
                             Challenge:
                           </span>{" "}
-                          {parseStyledText(scenario.challenge)}
+                          <StyledText text={scenario.challenge} />
                         </p>
                       </div>
                     </motion.div>
