@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 export default function InitialPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -23,9 +25,11 @@ export default function InitialPage() {
   const handleStart = () => {
     if (formData.name && formData.age && formData.weight && formData.height && formData.gender) {
       setIsStarting(true);
-      // Add your navigation logic here
+      // Store form data in localStorage
+      localStorage.setItem('playerData', JSON.stringify(formData));
+      // Navigate to scenario page
       setTimeout(() => {
-        console.log('Starting game with:', formData);
+        router.push('/scenerio');
       }, 1000);
     }
   };
@@ -330,7 +334,7 @@ export default function InitialPage() {
                       <option value="">SELECT...</option>
                       <option value="male">MALE</option>
                       <option value="female">FEMALE</option>
-                      <option value="other">OTHER</option>
+                      <option value="other">ACHHUT COMMUNITY</option>
                     </select>
                     <motion.div
                       className="absolute right-2 top-1/2 -translate-y-1/2 text-2xl pointer-events-none"
