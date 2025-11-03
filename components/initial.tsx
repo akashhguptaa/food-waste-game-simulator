@@ -360,7 +360,7 @@ export default function InitialPage() {
                       <option value="">SELECT...</option>
                       <option value="male">MALE</option>
                       <option value="female">FEMALE</option>
-                      <option value="other">ACHHUT COMMUNITY</option>
+                      <option value="other">OTHERS...</option>
                     </select>
                     <motion.div
                       className="absolute right-2 top-1/2 -translate-y-1/2 text-2xl pointer-events-none"
