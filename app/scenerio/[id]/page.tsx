@@ -4,6 +4,12 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useParams, useRouter } from "next/navigation";
 import scenariosData from "@/data/scenarios.json";
+import {
+  calculateTotalCalories,
+  calculateOptimalCalories,
+  calculateScore,
+  PORTION_SIZES,
+} from "@/utils/calculations";
 
 type FoodItem = {
   name: string;
@@ -13,6 +19,7 @@ type FoodItem = {
   max: number;
   optimal: number;
   step: number;
+  caloriesPerUnit: number;
 };
 
 type Scenario = {
@@ -260,6 +267,7 @@ export default function ScenarioGamePage() {
   const [selections, setSelections] = useState<{ [key: string]: number }>({});
   const [showStory, setShowStory] = useState(true);
   const [submitted, setSubmitted] = useState(false);
+  const [showPortionInfo, setShowPortionInfo] = useState<string | null>(null);
 
   useEffect(() => {
     const data = localStorage.getItem("playerData");
@@ -281,22 +289,34 @@ export default function ScenarioGamePage() {
   };
 
   const handleSubmit = () => {
+    if (!scenario) return;
+
     setSubmitted(true);
-    // Calculate score logic here
-    console.log("Selections:", selections);
 
-    // Navigate to next scenario or home after a delay
+    // Calculate calories and score
+    const userCalories = calculateTotalCalories(selections, scenario.foods);
+    const optimalCalories = calculateOptimalCalories(scenario.foods);
+    const score = calculateScore(userCalories, optimalCalories);
+
+    // Save result to localStorage
+    const result = {
+      scenarioId: scenario.id,
+      scenarioTitle: scenario.title,
+      userCalories,
+      optimalCalories,
+      score,
+      selections,
+    };
+
+    localStorage.setItem(
+      `scenario_${scenarioId}_result`,
+      JSON.stringify(result)
+    );
+
+    // Navigate to score page after a delay
     setTimeout(() => {
-      const nextScenarioId = scenarioId + 1;
-      const totalScenarios = scenariosData.scenarios.length;
-
-      if (nextScenarioId <= totalScenarios) {
-        router.push(`/scenerio/${nextScenarioId}`);
-      } else {
-        // All scenarios completed, go back home
-        router.push("/");
-      }
-    }, 2000);
+      router.push(`/score/${scenarioId}`);
+    }, 1500);
   };
 
   if (!scenario) {
@@ -558,12 +578,60 @@ export default function ScenarioGamePage() {
                                 {food.emoji}
                               </motion.span>
                               <div>
-                                <h3 className="text-2xl font-bold text-white">
-                                  {food.name}
-                                </h3>
+                                <div className="flex items-center gap-2">
+                                  <h3 className="text-2xl font-bold text-white">
+                                    {food.name}
+                                  </h3>
+                                  <button
+                                    onClick={() =>
+                                      setShowPortionInfo(
+                                        showPortionInfo === food.unit
+                                          ? null
+                                          : food.unit
+                                      )
+                                    }
+                                    className="text-cyan-400 hover:text-cyan-300 transition-colors"
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="h-5 w-5"
+                                      viewBox="0 0 20 20"
+                                      fill="currentColor"
+                                    >
+                                      <path
+                                        fillRule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clipRule="evenodd"
+                                      />
+                                    </svg>
+                                  </button>
+                                </div>
                                 <p className="text-white/60 text-sm">
                                   Adjust your portion size
                                 </p>
+                                {showPortionInfo === food.unit &&
+                                  PORTION_SIZES[food.unit] && (
+                                    <motion.div
+                                      initial={{ opacity: 0, y: -10 }}
+                                      animate={{ opacity: 1, y: 0 }}
+                                      className="mt-2 bg-cyan-900/50 border border-cyan-500/30 rounded-lg p-3 text-sm"
+                                    >
+                                      <div className="text-cyan-300 font-bold mb-1">
+                                        📏 Portion Guide:
+                                      </div>
+                                      <div className="text-white/90">
+                                        {PORTION_SIZES[food.unit].size} ≈{" "}
+                                        {PORTION_SIZES[food.unit].weight}
+                                      </div>
+                                      <div className="text-white/70 text-xs mt-1">
+                                        {PORTION_SIZES[food.unit].description}
+                                      </div>
+                                      <div className="text-cyan-300 text-xs mt-2">
+                                        💡 {food.caloriesPerUnit} calories per{" "}
+                                        {food.unit.slice(0, -1)}
+                                      </div>
+                                    </motion.div>
+                                  )}
                               </div>
                             </div>
                             <div className="text-right">
@@ -572,6 +640,12 @@ export default function ScenarioGamePage() {
                               </div>
                               <div className="text-sm text-white/60">
                                 {food.unit}
+                              </div>
+                              <div className="text-xs text-yellow-300 font-bold mt-1">
+                                {Math.round(
+                                  selections[food.name] * food.caloriesPerUnit
+                                )}{" "}
+                                cal
                               </div>
                             </div>
                           </div>
