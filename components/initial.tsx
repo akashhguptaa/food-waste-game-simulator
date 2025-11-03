@@ -431,39 +431,21 @@ export default function InitialPage() {
                   </span>
                 </motion.button>
               </motion.div>
-
-              {/* Now Playing */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.2 }}
-                className="mt-6 flex items-center justify-center gap-3 bg-slate-900/50 rounded-lg py-2 px-4"
-              >
-                <motion.div
-                  className="flex gap-1"
-                  animate={{ opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  {[...Array(5)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="w-1 bg-green-400 rounded-full"
-                      animate={{ height: ["8px", "16px", "8px"] }}
-                      transition={{
-                        duration: 0.8,
-                        repeat: Infinity,
-                        delay: i * 0.1,
-                      }}
-                    />
-                  ))}
-                </motion.div>
-                <span className="text-white/70 text-sm font-semibold">
-                  NOW PLAYING: initial.wav
-                </span>
-              </motion.div>
             </div>
           </div>
         </div>
+      </motion.div>
+
+      {/* More Food Decorations - Right Side */}
+      <motion.div
+        className="absolute top-1/2 right-8 text-7xl z-20 drop-shadow-2xl"
+        animate={{
+          y: [0, -15, 0],
+          rotate: [-5, 5, -5],
+        }}
+        transition={{ duration: 3.2, repeat: Infinity, delay: 0.7 }}
+      >
+        🌶️
       </motion.div>
 
       {/* More Food Decorations - Right Side */}
