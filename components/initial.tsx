@@ -3,11 +3,14 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import scenariosData from "@/data/scenarios.json";
+import { seedScenarios, createUserOnce, createGameSession } from "@/lib/db";
 
 export default function InitialPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
+    gmail: "",
     age: "",
     weight: "",
     height: "",
@@ -15,6 +18,14 @@ export default function InitialPage() {
   });
   const [isStarting, setIsStarting] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [startError, setStartError] = useState("");
+
+  const isValidEmail = (email: string) => {
+    // Accept only specific Plaksha ID formats.
+    const emailPattern =
+      /^(?:[a-zA-Z0-9]{3}|[a-zA-Z0-9]{2}\.[a-zA-Z0-9]{3}\.[a-zA-Z0-9]{2}|[a-zA-Z0-9]{3}\.[a-zA-Z0-9]{3}|[a-zA-Z0-9]{4}\.[a-zA-Z0-9]{4}\.[a-zA-Z0-9]{4}\.[a-zA-Z0-9]{4})@plaksha\.edu\.in$/;
+    return emailPattern.test(email.trim());
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -29,17 +40,61 @@ export default function InitialPage() {
     });
   };
 
-  const handleStart = () => {
+  const handleStart = async () => {
+    const emailIsValid = isValidEmail(formData.gmail);
+
     if (
       formData.name &&
+      formData.gmail &&
+      emailIsValid &&
       formData.age &&
       formData.weight &&
       formData.height &&
       formData.gender
     ) {
+      setStartError("");
       setIsStarting(true);
       // Store form data in localStorage
       localStorage.setItem("playerData", JSON.stringify(formData));
+
+      try {
+        // Seed scenarios table (idempotent)
+        await seedScenarios(scenariosData.scenarios);
+
+        // Create user once. If email already exists, block game start.
+        const { userId, alreadyExists } = await createUserOnce(formData);
+        if (alreadyExists) {
+          setStartError(
+            "This email has already been used for a submission. You can only submit once."
+          );
+          setIsStarting(false);
+          return;
+        }
+
+        if (userId === null) {
+          setStartError("Unable to start right now. Please try again.");
+          setIsStarting(false);
+          return;
+        }
+
+        localStorage.setItem("db_userId", String(userId));
+
+        // Create a new game session for this user.
+        const sessionId = await createGameSession(userId);
+        if (sessionId === null) {
+          setStartError("Unable to start right now. Please try again.");
+          setIsStarting(false);
+          return;
+        }
+
+        localStorage.setItem("db_sessionId", String(sessionId));
+      } catch (err) {
+        console.error("[DB] Error during game start:", err);
+        setStartError("Unable to start right now. Please try again.");
+        setIsStarting(false);
+        return;
+      }
+
       // Navigate to scenario page
       setTimeout(() => {
         router.push("/scenerio");
@@ -49,35 +104,46 @@ export default function InitialPage() {
 
   const isFormValid =
     formData.name &&
+    formData.gmail &&
+    isValidEmail(formData.gmail) &&
     formData.age &&
     formData.weight &&
     formData.height &&
     formData.gender;
 
-  // Particle system for space dust - only render after mount
-  const particles = Array.from({ length: 50 });
+  const showEmailError =
+    formData.gmail.length > 0 && !isValidEmail(formData.gmail);
+
+  // Deterministic particle values prevent SSR/CSR hydration mismatches.
+  const particles = Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    left: `${(i * 37) % 100}%`,
+    top: `${(i * 53) % 100}%`,
+    duration: 2 + (i % 4) * 0.75,
+    delay: (i % 5) * 0.3,
+  }));
 
   return (
     <div className="relative min-h-screen bg-[#0a0e27] overflow-hidden flex items-center justify-center p-4">
       {/* Space Background with Stars */}
       {mounted && (
         <div className="absolute inset-0">
-          {particles.map((_, i) => (
+          {particles.map((particle) => (
             <motion.div
-              key={i}
+              key={particle.id}
               className="absolute w-1 h-1 bg-white rounded-full"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: particle.left,
+                top: particle.top,
               }}
               animate={{
                 opacity: [0.2, 1, 0.2],
                 scale: [1, 1.5, 1],
               }}
               transition={{
-                duration: Math.random() * 3 + 2,
+                duration: particle.duration,
                 repeat: Infinity,
-                delay: Math.random() * 2,
+                delay: particle.delay,
               }}
             />
           ))}
@@ -241,6 +307,51 @@ export default function InitialPage() {
                 <motion.div
                   initial={{ x: -50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.35 }}
+                  className="flex items-center gap-4"
+                >
+                  <div className="flex items-center gap-2 w-48">
+                    <span className="text-3xl">📧</span>
+                    <label className="text-white font-bold text-lg tracking-wide uppercase">
+                      GMAIL ID:
+                    </label>
+                  </div>
+                  <div className="flex-1 relative">
+                    <input
+                      type="email"
+                      name="gmail"
+                      value={formData.gmail}
+                      onChange={handleInputChange}
+                      pattern="^(?:[a-zA-Z0-9]{3}|[a-zA-Z0-9]{2}\.[a-zA-Z0-9]{3}\.[a-zA-Z0-9]{2}|[a-zA-Z0-9]{3}\.[a-zA-Z0-9]{3}|[a-zA-Z0-9]{4}\.[a-zA-Z0-9]{4}\.[a-zA-Z0-9]{4}\.[a-zA-Z0-9]{4})@plaksha\.edu\.in$"
+                      placeholder=""
+                      className={`w-full px-4 py-3 rounded-lg bg-white border-2 text-slate-800 placeholder-slate-400 focus:outline-none transition-all font-medium text-base shadow-inner ${
+                        showEmailError
+                          ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/40"
+                          : "border-slate-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50"
+                      }`}
+                    />
+                    <motion.div
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-2xl"
+                      animate={{ y: [-2, 2, -2] }}
+                      transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
+                    >
+                      ✉️
+                    </motion.div>
+                  </div>
+                </motion.div>
+
+                {showEmailError && (
+                  <p className="-mt-2 pl-52 text-sm text-red-400 font-medium">
+                    Use one of these formats: xxx@plaksha.edu.in,
+                    xx.xxx.xx@plaksha.edu.in, xxx.xxx@plaksha.edu.in, or
+                    xxxx.xxxx.xxxx.xxxx@plaksha.edu.in.
+                  </p>
+                )}
+
+                {/* Age Input */}
+                <motion.div
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.4 }}
                   className="flex items-center gap-4"
                 >
@@ -380,9 +491,14 @@ export default function InitialPage() {
                 transition={{ delay: 0.8 }}
                 className="pt-6"
               >
+                {startError && (
+                  <p className="mb-3 text-center text-sm font-semibold text-red-400">
+                    {startError}
+                  </p>
+                )}
                 <motion.button
                   onClick={handleStart}
-                  disabled={!isFormValid}
+                  disabled={!isFormValid || isStarting}
                   whileHover={isFormValid ? { scale: 1.02 } : {}}
                   whileTap={isFormValid ? { scale: 0.98 } : {}}
                   className={`w-full py-5 rounded-xl font-black text-xl md:text-2xl transition-all relative overflow-hidden shadow-lg ${

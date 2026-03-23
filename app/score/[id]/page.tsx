@@ -13,6 +13,7 @@ import {
   getScoreFeedback,
   ACTIVITY_FACTORS,
 } from "@/utils/calculations";
+import { getScenarioDbId, insertScenarioScore } from "@/lib/db";
 
 type FoodItem = {
   name: string;
@@ -82,6 +83,28 @@ export default function ScorePage() {
       }
     }
     setAllResults(results);
+
+    // ── Supabase: save scenario score (non-blocking) ────────────────────────
+    (async () => {
+      try {
+        const sessionId = localStorage.getItem("db_sessionId");
+        if (!sessionId || !result) return;
+
+        const parsedResult: ScenarioResult = JSON.parse(result);
+        const scenarioKey = `scenario_${scenarioId}`;
+        const scenarioDbId = await getScenarioDbId(scenarioKey);
+        if (scenarioDbId === null) return;
+
+        await insertScenarioScore({
+          sessionId: Number(sessionId),
+          scenarioDbId,
+          score: parsedResult.score,
+          maxScore: 100,
+        });
+      } catch (err) {
+        console.error("[DB] Error saving scenario score:", err);
+      }
+    })();
   }, [scenarioId]);
 
   const handleContinue = () => {

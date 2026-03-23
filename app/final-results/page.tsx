@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import scenariosData from "@/data/scenarios.json";
 import { calculateBMR, calculateTDEE } from "@/utils/calculations";
+import { finalizeGameSession } from "@/lib/db";
 
 type ScenarioResult = {
   scenarioId: number;
@@ -38,13 +39,35 @@ export default function FinalResultsPage() {
       }
     }
     setAllResults(results);
+
+    // ── Supabase: finalize game session (non-blocking) ──────────────────────
+    (async () => {
+      try {
+        const sessionId = localStorage.getItem("db_sessionId");
+        if (!sessionId || results.length === 0) return;
+
+        const overallScore =
+          results.reduce((sum, r) => sum + r.score, 0) / results.length;
+
+        await finalizeGameSession({
+          sessionId: Number(sessionId),
+          finalScore: Math.round(overallScore),
+          totalScenarios: results.length,
+        });
+      } catch (err) {
+        console.error("[DB] Error finalizing game session:", err);
+      }
+    })();
   }, []);
 
   const handlePlayAgain = () => {
-    // Clear all results
+    // Clear all scenario results
     for (let i = 1; i <= scenariosData.scenarios.length; i++) {
       localStorage.removeItem(`scenario_${i}_result`);
     }
+    // Clear DB session IDs so a new session is created on restart
+    localStorage.removeItem("db_sessionId");
+    localStorage.removeItem("db_userId");
     router.push("/");
   };
 

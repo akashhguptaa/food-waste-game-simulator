@@ -268,6 +268,13 @@ export default function ScenarioGamePage() {
   const [showStory, setShowStory] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [showPortionInfo, setShowPortionInfo] = useState<string | null>(null);
+  const particles = Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    left: `${(i * 37) % 100}%`,
+    top: `${(i * 53) % 100}%`,
+    duration: 2 + (i % 4) * 0.75,
+    delay: (i % 5) * 0.3,
+  }));
 
   useEffect(() => {
     const data = localStorage.getItem("playerData");
@@ -331,22 +338,22 @@ export default function ScenarioGamePage() {
     <div className="relative min-h-screen bg-[#0a0e27] overflow-hidden flex items-center justify-center p-4">
       {/* Space Background with Stars */}
       <div className="absolute inset-0">
-        {Array.from({ length: 50 }).map((_, i) => (
+        {particles.map((particle) => (
           <motion.div
-            key={i}
+            key={particle.id}
             className="absolute w-1 h-1 bg-white rounded-full"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: particle.left,
+              top: particle.top,
             }}
             animate={{
               opacity: [0.2, 1, 0.2],
               scale: [1, 1.5, 1],
             }}
             transition={{
-              duration: Math.random() * 3 + 2,
+              duration: particle.duration,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: particle.delay,
             }}
           />
         ))}
