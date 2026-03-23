@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import scenariosData from "@/data/scenarios.json";
-import { seedScenarios, createUserOnce, createGameSession } from "@/lib/db";
 
 export default function InitialPage() {
   const router = useRouter();
@@ -58,11 +57,22 @@ export default function InitialPage() {
       localStorage.setItem("playerData", JSON.stringify(formData));
 
       try {
-        // Seed scenarios table (idempotent)
-        await seedScenarios(scenariosData.scenarios);
+        const res = await fetch("/api/db", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "initializeGame",
+            payload: {
+              player: formData,
+              scenarios: scenariosData.scenarios.map((s) => ({
+                id: s.id,
+                title: s.title,
+              })),
+            },
+          }),
+        });
 
-        // Create user once. If email already exists, block game start.
-        const { userId, alreadyExists } = await createUserOnce(formData);
+        const { userId, sessionId, alreadyExists } = await res.json();
         if (alreadyExists) {
           setStartError(
             "This email has already been used for a submission. You can only submit once."
@@ -78,9 +88,6 @@ export default function InitialPage() {
         }
 
         localStorage.setItem("db_userId", String(userId));
-
-        // Create a new game session for this user.
-        const sessionId = await createGameSession(userId);
         if (sessionId === null) {
           setStartError("Unable to start right now. Please try again.");
           setIsStarting(false);

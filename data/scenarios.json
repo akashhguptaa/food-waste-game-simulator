@@ -62,49 +62,49 @@
     {
       "id": 2,
       "emoji": "📚",
-      "title": "The Study Marathon",
-      "setting": "You've been studying for <highlight>6 HOURS</highlight> straight for tomorrow's <exam>📝 TEST</exam> and your brain is <fried>FRIED</fried>! 🤯",
-      "challenge": "Your mom just brought snacks — chips 🍟, sandwich 🥪, smoothie 🥤, and fruits 🍎. Choose wisely, because your <brain>brain's tired</brain>, but your body isn't! 🧠",
+      "title": "The Hostel All-Nighter",
+      "setting": "You're an <engineer>ENGINEERING STUDENT</engineer> living in a <hostel>HOSTEL</hostel> and grinding for tomorrow's <exam>⚙️ INTERNAL EXAM</exam> till <late>2 AM</late>! 😵",
+      "challenge": "The hostel canteen is still open with Maggi 🍜, samosa 🥟, cold coffee ☕, and bananas 🍌. Pick smart portions so you stay focused without <wasting>wasting food</wasting>! ♻️",
       "foods": [
         {
-          "name": "Sandwich",
-          "emoji": "🥪",
+          "name": "Maggi",
+          "emoji": "🍜",
+          "unit": "bowls",
+          "min": 0,
+          "max": 3,
+          "optimal": 1,
+          "step": 1,
+          "caloriesPerUnit": 320
+        },
+        {
+          "name": "Samosa",
+          "emoji": "🥟",
           "unit": "pieces",
           "min": 0,
           "max": 3,
           "optimal": 1,
-          "step": 0.5,
-          "caloriesPerUnit": 250
+          "step": 1,
+          "caloriesPerUnit": 180
         },
         {
-          "name": "Smoothie",
-          "emoji": "🥤",
+          "name": "Cold Coffee",
+          "emoji": "☕",
           "unit": "glasses",
           "min": 0,
           "max": 3,
           "optimal": 1,
           "step": 1,
-          "caloriesPerUnit": 200
+          "caloriesPerUnit": 190
         },
         {
-          "name": "Chips",
-          "emoji": "🍟",
-          "unit": "bowls",
-          "min": 0,
-          "max": 3,
-          "optimal": 0.5,
-          "step": 0.5,
-          "caloriesPerUnit": 300
-        },
-        {
-          "name": "Fruits",
-          "emoji": "🍎",
+          "name": "Bananas",
+          "emoji": "🍌",
           "unit": "servings",
           "min": 0,
           "max": 4,
           "optimal": 2,
           "step": 1,
-          "caloriesPerUnit": 80
+          "caloriesPerUnit": 90
         }
       ]
     },

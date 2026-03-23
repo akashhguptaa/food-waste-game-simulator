@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import scenariosData from "@/data/scenarios.json";
 import { calculateBMR, calculateTDEE } from "@/utils/calculations";
-import { finalizeGameSession } from "@/lib/db";
 
 type ScenarioResult = {
   scenarioId: number;
@@ -49,10 +48,17 @@ export default function FinalResultsPage() {
         const overallScore =
           results.reduce((sum, r) => sum + r.score, 0) / results.length;
 
-        await finalizeGameSession({
-          sessionId: Number(sessionId),
-          finalScore: Math.round(overallScore),
-          totalScenarios: results.length,
+        await fetch("/api/db", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "finalizeSession",
+            payload: {
+              sessionId: Number(sessionId),
+              finalScore: Math.round(overallScore),
+              totalScenarios: results.length,
+            },
+          }),
         });
       } catch (err) {
         console.error("[DB] Error finalizing game session:", err);

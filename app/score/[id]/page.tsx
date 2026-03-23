@@ -13,7 +13,6 @@ import {
   getScoreFeedback,
   ACTIVITY_FACTORS,
 } from "@/utils/calculations";
-import { getScenarioDbId, insertScenarioScore } from "@/lib/db";
 
 type FoodItem = {
   name: string;
@@ -91,15 +90,18 @@ export default function ScorePage() {
         if (!sessionId || !result) return;
 
         const parsedResult: ScenarioResult = JSON.parse(result);
-        const scenarioKey = `scenario_${scenarioId}`;
-        const scenarioDbId = await getScenarioDbId(scenarioKey);
-        if (scenarioDbId === null) return;
-
-        await insertScenarioScore({
-          sessionId: Number(sessionId),
-          scenarioDbId,
-          score: parsedResult.score,
-          maxScore: 100,
+        await fetch("/api/db", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "saveScenarioScore",
+            payload: {
+              sessionId: Number(sessionId),
+              scenarioKey: `scenario_${scenarioId}`,
+              score: parsedResult.score,
+              maxScore: 100,
+            },
+          }),
         });
       } catch (err) {
         console.error("[DB] Error saving scenario score:", err);
