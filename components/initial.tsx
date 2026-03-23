@@ -21,9 +21,9 @@ export default function InitialPage() {
   const [startError, setStartError] = useState("");
 
   const isValidEmail = (email: string) => {
-    // Accept only specific Plaksha ID formats.
+    // Accept 1-4 alphanumeric blocks before @plaksha.edu.in.
     const emailPattern =
-      /^(?:[a-zA-Z0-9]{3}|[a-zA-Z0-9]{2}\.[a-zA-Z0-9]{3}\.[a-zA-Z0-9]{2}|[a-zA-Z0-9]{3}\.[a-zA-Z0-9]{3}|[a-zA-Z0-9]{4}\.[a-zA-Z0-9]{4}\.[a-zA-Z0-9]{4}\.[a-zA-Z0-9]{4})@plaksha\.edu\.in$/;
+      /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+){0,3}@plaksha\.edu\.in$/;
     return emailPattern.test(email.trim());
   };
 
@@ -322,7 +322,7 @@ export default function InitialPage() {
                       name="gmail"
                       value={formData.gmail}
                       onChange={handleInputChange}
-                      pattern="^(?:[a-zA-Z0-9]{20}|[a-zA-Z0-9]{20}\.[a-zA-Z0-9]{20}\.[a-zA-Z0-9]{20}|[a-zA-Z0-9]{20}\.[a-zA-Z0-9]{20}|[a-zA-Z0-9]{20}\.[a-zA-Z0-9]{20}\.[a-zA-Z0-9]{20}\.[a-zA-Z0-9]{20})@plaksha\.edu\.in$"
+                      pattern="^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+){0,3}@plaksha\.edu\.in$"
                       placeholder=""
                       className={`w-full px-4 py-3 rounded-lg bg-white border-2 text-slate-800 placeholder-slate-400 focus:outline-none transition-all font-medium text-base shadow-inner ${
                         showEmailError
@@ -342,9 +342,9 @@ export default function InitialPage() {
 
                 {showEmailError && (
                   <p className="-mt-2 pl-52 text-sm text-red-400 font-medium">
-                    Use one of these formats: xxx@plaksha.edu.in,
-                    xx.xxx.xx@plaksha.edu.in, xxx.xxx@plaksha.edu.in, or
-                    xxxx.xxxx.xxxx.xxxx@plaksha.edu.in.
+                    Use 1 to 4 alphanumeric blocks before @plaksha.edu.in.
+                    Example: abc@plaksha.edu.in, abc.def@plaksha.edu.in,
+                    abc.def.ghi@plaksha.edu.in, abc.def.ghi.jkl@plaksha.edu.in.
                   </p>
                 )}
 
