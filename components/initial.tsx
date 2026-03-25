@@ -9,7 +9,7 @@ export default function InitialPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
-    gmail: "",
+    email: "",
     age: "",
     weight: "",
     height: "",
@@ -40,11 +40,11 @@ export default function InitialPage() {
   };
 
   const handleStart = async () => {
-    const emailIsValid = isValidEmail(formData.gmail);
+    const emailIsValid = isValidEmail(formData.email);
 
     if (
       formData.name &&
-      formData.gmail &&
+      formData.email &&
       emailIsValid &&
       formData.age &&
       formData.weight &&
@@ -63,7 +63,10 @@ export default function InitialPage() {
           body: JSON.stringify({
             action: "initializeGame",
             payload: {
-              player: formData,
+              player: {
+                ...formData,
+                gmail: formData.email,
+              },
               scenarios: scenariosData.scenarios.map((s) => ({
                 id: s.id,
                 title: s.title,
@@ -111,15 +114,15 @@ export default function InitialPage() {
 
   const isFormValid =
     formData.name &&
-    formData.gmail &&
-    isValidEmail(formData.gmail) &&
+    formData.email &&
+    isValidEmail(formData.email) &&
     formData.age &&
     formData.weight &&
     formData.height &&
     formData.gender;
 
   const showEmailError =
-    formData.gmail.length > 0 && !isValidEmail(formData.gmail);
+    formData.email.length > 0 && !isValidEmail(formData.email);
 
   // Deterministic particle values prevent SSR/CSR hydration mismatches.
   const particles = Array.from({ length: 50 }, (_, i) => ({
@@ -131,7 +134,7 @@ export default function InitialPage() {
   }));
 
   return (
-    <div className="relative min-h-screen bg-[#0a0e27] overflow-hidden flex items-center justify-center p-4">
+    <div className="relative min-h-screen bg-[#0a0e27] overflow-hidden flex items-start md:items-center justify-center px-3 py-16 sm:p-4">
       {/* Space Background with Stars */}
       {mounted && (
         <div className="absolute inset-0">
@@ -162,7 +165,7 @@ export default function InitialPage() {
 
       {/* Floating Food Decorations - Top Left */}
       <motion.div
-        className="absolute top-8 left-8 text-8xl z-20 drop-shadow-2xl"
+        className="hidden sm:block absolute top-8 left-8 text-5xl md:text-8xl z-20 drop-shadow-2xl"
         animate={{
           y: [0, -20, 0],
           rotate: [-5, 5, -5],
@@ -174,7 +177,7 @@ export default function InitialPage() {
 
       {/* Floating Food Decorations - Top Right */}
       <motion.div
-        className="absolute top-12 right-12 text-7xl z-20 drop-shadow-2xl"
+        className="hidden sm:block absolute top-12 right-12 text-5xl md:text-7xl z-20 drop-shadow-2xl"
         animate={{
           y: [0, -15, 0],
           rotate: [5, -5, 5],
@@ -186,7 +189,7 @@ export default function InitialPage() {
 
       {/* Avocado - Left Side */}
       <motion.div
-        className="absolute top-1/3 left-4 text-7xl z-20 drop-shadow-2xl"
+        className="hidden md:block absolute top-1/3 left-4 text-7xl z-20 drop-shadow-2xl"
         animate={{
           y: [0, -10, 0],
           rotate: [0, 10, 0],
@@ -198,7 +201,7 @@ export default function InitialPage() {
 
       {/* Meat - Bottom Left */}
       <motion.div
-        className="absolute bottom-20 left-8 text-9xl z-20 drop-shadow-2xl"
+        className="hidden sm:block absolute bottom-20 left-8 text-6xl md:text-9xl z-20 drop-shadow-2xl"
         animate={{
           y: [0, -12, 0],
           rotate: [-3, 3, -3],
@@ -225,7 +228,7 @@ export default function InitialPage() {
 
           {/* Inner Frame */}
           <div className="bg-gradient-to-b from-slate-800 to-slate-900 rounded-[1.3rem] p-1">
-            <div className="bg-[#1a1f3a] rounded-[1.2rem] p-8 md:p-12 relative overflow-hidden">
+            <div className="bg-[#1a1f3a] rounded-[1.2rem] p-4 sm:p-6 md:p-12 relative overflow-hidden">
               {/* Scanline Effect */}
               <div className="absolute inset-0 bg-[linear-gradient(0deg,transparent_50%,rgba(255,255,255,0.03)_50%)] bg-[length:100%_4px] pointer-events-none"></div>
 
@@ -234,10 +237,10 @@ export default function InitialPage() {
                 initial={{ y: -30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="text-center mb-10 relative"
+                className="text-center mb-8 sm:mb-10 relative"
               >
                 <motion.h1
-                  className="text-5xl md:text-7xl font-black mb-2 relative"
+                  className="text-3xl sm:text-5xl md:text-7xl font-black mb-1 sm:mb-2 relative leading-tight"
                   style={{
                     color: "#d4a574",
                     textShadow:
@@ -256,7 +259,7 @@ export default function InitialPage() {
                   PORTION
                 </motion.h1>
                 <motion.h1
-                  className="text-5xl md:text-7xl font-black relative"
+                  className="text-3xl sm:text-5xl md:text-7xl font-black relative leading-tight"
                   style={{
                     color: "#d4a574",
                     textShadow:
@@ -283,11 +286,11 @@ export default function InitialPage() {
                   initial={{ x: -50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.3 }}
-                  className="flex items-center gap-4"
+                  className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4"
                 >
-                  <div className="flex items-center gap-2 w-48">
-                    <span className="text-3xl">🥜</span>
-                    <label className="text-white font-bold text-lg tracking-wide uppercase">
+                  <div className="flex items-center gap-2 w-full sm:w-48">
+                    <span className="text-2xl sm:text-3xl">🥜</span>
+                    <label className="text-white font-bold text-sm sm:text-lg tracking-wide uppercase">
                       NAME:
                     </label>
                   </div>
@@ -297,7 +300,7 @@ export default function InitialPage() {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      placeholder=""
+                      placeholder="Enter your name"
                       className="w-full px-4 py-3 rounded-lg bg-white border-2 border-slate-400 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 transition-all font-medium text-base shadow-inner"
                     />
                     <motion.div
@@ -315,22 +318,22 @@ export default function InitialPage() {
                   initial={{ x: -50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.35 }}
-                  className="flex items-center gap-4"
+                  className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4"
                 >
-                  <div className="flex items-center gap-2 w-48">
-                    <span className="text-3xl">📧</span>
-                    <label className="text-white font-bold text-lg tracking-wide uppercase">
-                      GMAIL ID:
+                  <div className="flex items-center gap-2 w-full sm:w-48">
+                    <span className="text-2xl sm:text-3xl">📧</span>
+                    <label className="text-white font-bold text-sm sm:text-lg tracking-wide uppercase">
+                      EMAIL:
                     </label>
                   </div>
                   <div className="flex-1 relative">
                     <input
                       type="email"
-                      name="gmail"
-                      value={formData.gmail}
+                      name="email"
+                      value={formData.email}
                       onChange={handleInputChange}
                       pattern="^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+){0,3}@plaksha\.edu\.in$"
-                      placeholder=""
+                      placeholder="Enter your email"
                       className={`w-full px-4 py-3 rounded-lg bg-white border-2 text-slate-800 placeholder-slate-400 focus:outline-none transition-all font-medium text-base shadow-inner ${
                         showEmailError
                           ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/40"
@@ -348,7 +351,7 @@ export default function InitialPage() {
                 </motion.div>
 
                 {showEmailError && (
-                  <p className="-mt-2 pl-52 text-sm text-red-400 font-medium">
+                  <p className="-mt-1 sm:-mt-2 pl-0 sm:pl-52 text-xs sm:text-sm text-red-400 font-medium">
                     Use 1 to 4 alphanumeric blocks before @plaksha.edu.in.
                     Example: abc@plaksha.edu.in, abc.def@plaksha.edu.in,
                     abc.def.ghi@plaksha.edu.in, abc.def.ghi.jkl@plaksha.edu.in.
@@ -360,11 +363,11 @@ export default function InitialPage() {
                   initial={{ x: -50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.4 }}
-                  className="flex items-center gap-4"
+                  className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4"
                 >
-                  <div className="flex items-center gap-2 w-48">
-                    <span className="text-3xl">🍪</span>
-                    <label className="text-white font-bold text-lg tracking-wide uppercase">
+                  <div className="flex items-center gap-2 w-full sm:w-48">
+                    <span className="text-2xl sm:text-3xl">🍪</span>
+                    <label className="text-white font-bold text-sm sm:text-lg tracking-wide uppercase">
                       AGE:
                     </label>
                   </div>
@@ -374,7 +377,7 @@ export default function InitialPage() {
                       name="age"
                       value={formData.age}
                       onChange={handleInputChange}
-                      placeholder=""
+                      placeholder="Enter your age"
                       className="w-full px-4 py-3 rounded-lg bg-white border-2 border-slate-400 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/50 transition-all font-medium text-base shadow-inner"
                     />
                     <motion.div
@@ -392,11 +395,11 @@ export default function InitialPage() {
                   initial={{ x: -50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.5 }}
-                  className="flex items-center gap-4"
+                  className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4"
                 >
-                  <div className="flex items-center gap-2 w-48">
-                    <span className="text-3xl">🍗</span>
-                    <label className="text-white font-bold text-lg tracking-wide uppercase">
+                  <div className="flex items-center gap-2 w-full sm:w-48">
+                    <span className="text-2xl sm:text-3xl">🍗</span>
+                    <label className="text-white font-bold text-sm sm:text-lg tracking-wide uppercase">
                       WEIGHT (KG):
                     </label>
                   </div>
@@ -406,7 +409,7 @@ export default function InitialPage() {
                       name="weight"
                       value={formData.weight}
                       onChange={handleInputChange}
-                      placeholder=""
+                      placeholder="Enter your weight (kg)"
                       className="w-full px-4 py-3 rounded-lg bg-white border-2 border-slate-400 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-400/50 transition-all font-medium text-base shadow-inner"
                     />
                     <motion.div
@@ -424,11 +427,11 @@ export default function InitialPage() {
                   initial={{ x: -50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.6 }}
-                  className="flex items-center gap-4"
+                  className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4"
                 >
-                  <div className="flex items-center gap-2 w-48">
-                    <span className="text-3xl">🍇</span>
-                    <label className="text-white font-bold text-lg tracking-wide uppercase">
+                  <div className="flex items-center gap-2 w-full sm:w-48">
+                    <span className="text-2xl sm:text-3xl">🍇</span>
+                    <label className="text-white font-bold text-sm sm:text-lg tracking-wide uppercase">
                       HEIGHT (CM):
                     </label>
                   </div>
@@ -438,7 +441,7 @@ export default function InitialPage() {
                       name="height"
                       value={formData.height}
                       onChange={handleInputChange}
-                      placeholder=""
+                      placeholder="Enter your height (cm)"
                       className="w-full px-4 py-3 rounded-lg bg-white border-2 border-slate-400 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/50 transition-all font-medium text-base shadow-inner"
                     />
                     <motion.div
@@ -460,11 +463,11 @@ export default function InitialPage() {
                   initial={{ x: -50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.7 }}
-                  className="flex items-center gap-4"
+                  className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4"
                 >
-                  <div className="flex items-center gap-2 w-48">
-                    <span className="text-3xl">🍄</span>
-                    <label className="text-white font-bold text-lg tracking-wide uppercase">
+                  <div className="flex items-center gap-2 w-full sm:w-48">
+                    <span className="text-2xl sm:text-3xl">🍄</span>
+                    <label className="text-white font-bold text-sm sm:text-lg tracking-wide uppercase">
                       GENDER:
                     </label>
                   </div>
@@ -475,7 +478,7 @@ export default function InitialPage() {
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 rounded-lg bg-white border-2 border-slate-400 text-slate-800 focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/50 transition-all font-medium text-base shadow-inner appearance-none cursor-pointer"
                     >
-                      <option value="">SELECT...</option>
+                      <option value="">Select your gender</option>
                       <option value="male">MALE</option>
                       <option value="female">FEMALE</option>
                       <option value="other">OTHERS...</option>
@@ -508,7 +511,7 @@ export default function InitialPage() {
                   disabled={!isFormValid || isStarting}
                   whileHover={isFormValid ? { scale: 1.02 } : {}}
                   whileTap={isFormValid ? { scale: 0.98 } : {}}
-                  className={`w-full py-5 rounded-xl font-black text-xl md:text-2xl transition-all relative overflow-hidden shadow-lg ${
+                  className={`w-full py-4 sm:py-5 rounded-xl font-black text-lg sm:text-xl md:text-2xl transition-all relative overflow-hidden shadow-lg ${
                     isFormValid
                       ? "bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 text-white cursor-pointer"
                       : "bg-gray-600 text-gray-400 cursor-not-allowed"
@@ -561,19 +564,7 @@ export default function InitialPage() {
 
       {/* More Food Decorations - Right Side */}
       <motion.div
-        className="absolute top-1/2 right-8 text-7xl z-20 drop-shadow-2xl"
-        animate={{
-          y: [0, -15, 0],
-          rotate: [-5, 5, -5],
-        }}
-        transition={{ duration: 3.2, repeat: Infinity, delay: 0.7 }}
-      >
-        🌶️
-      </motion.div>
-
-      {/* More Food Decorations - Right Side */}
-      <motion.div
-        className="absolute top-1/2 right-8 text-7xl z-20 drop-shadow-2xl"
+        className="hidden sm:block absolute top-1/2 right-8 text-5xl md:text-7xl z-20 drop-shadow-2xl"
         animate={{
           y: [0, -15, 0],
           rotate: [-5, 5, -5],
@@ -584,7 +575,7 @@ export default function InitialPage() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-32 right-12 text-8xl z-20 drop-shadow-2xl"
+        className="hidden sm:block absolute bottom-32 right-12 text-6xl md:text-8xl z-20 drop-shadow-2xl"
         animate={{
           y: [0, -18, 0],
           rotate: [3, -3, 3],

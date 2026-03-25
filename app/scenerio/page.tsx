@@ -22,7 +22,7 @@ export default function ScenarioPage() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#0a0e27] overflow-hidden flex items-center justify-center p-4">
+    <div className="relative min-h-screen bg-[#0a0e27] overflow-hidden flex items-start md:items-center justify-center px-3 py-16 sm:p-4">
       {/* Space Background with Stars */}
       <div className="absolute inset-0">
         {particles.map((particle) => (
@@ -66,7 +66,7 @@ export default function ScenarioPage() {
 
           {/* Inner Frame */}
           <div className="bg-gradient-to-b from-slate-800 to-slate-900 rounded-[1.3rem] p-1">
-            <div className="bg-[#1a1f3a] rounded-[1.2rem] p-8 md:p-12 relative overflow-hidden">
+            <div className="bg-[#1a1f3a] rounded-[1.2rem] p-4 sm:p-6 md:p-12 relative overflow-hidden">
               {/* Scanline Effect */}
               <div className="absolute inset-0 bg-[linear-gradient(0deg,transparent_50%,rgba(255,255,255,0.03)_50%)] bg-[length:100%_4px] pointer-events-none"></div>
 
@@ -78,7 +78,7 @@ export default function ScenarioPage() {
                 className="text-center mb-10"
               >
                 <motion.h1
-                  className="text-5xl md:text-7xl font-black mb-2"
+                  className="text-3xl sm:text-5xl md:text-7xl font-black mb-2"
                   style={{
                     color: "#d4a574",
                     textShadow:
@@ -104,12 +104,12 @@ export default function ScenarioPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
-                  className="mb-8 p-6 bg-slate-900/50 rounded-xl border border-cyan-500/30"
+                  className="mb-8 p-4 sm:p-6 bg-slate-900/50 rounded-xl border border-cyan-500/30"
                 >
-                  <h2 className="text-2xl font-bold text-cyan-400 mb-4 flex items-center gap-2">
+                  <h2 className="text-xl sm:text-2xl font-bold text-cyan-400 mb-4 flex items-center gap-2">
                     <span>👤</span> Player Profile
                   </h2>
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-3 sm:gap-4">
                     <div>
                       <p className="text-white/60 text-sm uppercase">Name</p>
                       <p className="text-white font-bold">{playerData.name}</p>
@@ -147,7 +147,7 @@ export default function ScenarioPage() {
                 transition={{ delay: 0.7 }}
                 className="text-center space-y-6"
               >
-                <div className="text-8xl mb-6">
+                <div className="text-6xl sm:text-8xl mb-6">
                   <motion.span
                     animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
                     transition={{ duration: 2, repeat: Infinity }}
@@ -156,17 +156,17 @@ export default function ScenarioPage() {
                   </motion.span>
                 </div>
 
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
                   Welcome to the Game, {playerData?.name || "Player"}!
                 </h2>
 
-                <p className="text-xl text-white/80 max-w-2xl mx-auto">
+                <p className="text-base sm:text-xl text-white/80 max-w-2xl mx-auto">
                   Get ready to test your portion estimation skills. We'll show
                   you various foods, and you'll need to guess their portion
                   sizes based on your nutritional knowledge!
                 </p>
 
-                <div className="flex flex-wrap justify-center gap-4 text-5xl mt-8">
+                <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-4xl sm:text-5xl mt-8">
                   <motion.span
                     animate={{ y: [0, -10, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity, delay: 0 }}
@@ -204,7 +204,7 @@ export default function ScenarioPage() {
                   onClick={() => (window.location.href = "/scenerio/1")}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="mt-8 px-12 py-5 bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 text-white font-black text-xl rounded-xl shadow-lg relative overflow-hidden cursor-pointer"
+                  className="mt-8 w-full sm:w-auto px-6 sm:px-12 py-4 sm:py-5 bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 text-white font-black text-base sm:text-xl rounded-xl shadow-lg relative overflow-hidden cursor-pointer"
                   style={{
                     boxShadow:
                       "0 0 30px rgba(6, 182, 212, 0.6), 0 0 60px rgba(6, 182, 212, 0.3)",
@@ -229,7 +229,7 @@ export default function ScenarioPage() {
 
       {/* Floating Food Decorations */}
       <motion.div
-        className="absolute top-12 left-12 text-7xl z-20 drop-shadow-2xl"
+        className="hidden sm:block absolute top-12 left-12 text-5xl md:text-7xl z-20 drop-shadow-2xl"
         animate={{
           y: [0, -20, 0],
           rotate: [-5, 5, -5],
@@ -240,7 +240,7 @@ export default function ScenarioPage() {
       </motion.div>
 
       <motion.div
-        className="absolute top-12 right-12 text-7xl z-20 drop-shadow-2xl"
+        className="hidden sm:block absolute top-12 right-12 text-5xl md:text-7xl z-20 drop-shadow-2xl"
         animate={{
           y: [0, -15, 0],
           rotate: [5, -5, 5],
@@ -251,7 +251,7 @@ export default function ScenarioPage() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-20 left-8 text-8xl z-20 drop-shadow-2xl"
+        className="hidden sm:block absolute bottom-20 left-8 text-6xl md:text-8xl z-20 drop-shadow-2xl"
         animate={{
           y: [0, -12, 0],
           rotate: [-3, 3, -3],
@@ -262,7 +262,7 @@ export default function ScenarioPage() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-20 right-12 text-8xl z-20 drop-shadow-2xl"
+        className="hidden sm:block absolute bottom-20 right-12 text-6xl md:text-8xl z-20 drop-shadow-2xl"
         animate={{
           y: [0, -18, 0],
           rotate: [3, -3, 3],

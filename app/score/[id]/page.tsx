@@ -145,7 +145,7 @@ export default function ScorePage() {
     allResults.reduce((sum, r) => sum + r.score, 0) / allResults.length;
 
   return (
-    <div className="relative min-h-screen bg-[#0a0e27] overflow-hidden flex items-center justify-center p-4">
+    <div className="relative min-h-screen bg-[#0a0e27] overflow-hidden flex items-start md:items-center justify-center px-3 py-16 sm:p-4">
       {/* Space Background */}
       {mounted && (
         <div className="absolute inset-0">
@@ -187,7 +187,7 @@ export default function ScorePage() {
           <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-red-500 rounded-full shadow-lg shadow-red-500/50"></div>
 
           <div className="bg-gradient-to-b from-slate-800 to-slate-900 rounded-[1.3rem] p-1">
-            <div className="bg-[#1a1f3a] rounded-[1.2rem] p-8 md:p-12 relative overflow-hidden max-h-[90vh] overflow-y-auto">
+            <div className="bg-[#1a1f3a] rounded-[1.2rem] p-4 sm:p-6 md:p-12 relative overflow-hidden max-h-[92vh] overflow-y-auto">
               <div className="absolute inset-0 bg-[linear-gradient(0deg,transparent_50%,rgba(255,255,255,0.03)_50%)] bg-[length:100%_4px] pointer-events-none"></div>
 
               {/* Header */}
@@ -195,7 +195,7 @@ export default function ScorePage() {
                 <motion.h1
                   initial={{ y: -20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  className="text-4xl md:text-6xl font-black mb-2"
+                  className="text-2xl sm:text-4xl md:text-6xl font-black mb-2"
                   style={{
                     color: "#d4a574",
                     textShadow:
@@ -209,7 +209,7 @@ export default function ScorePage() {
                   initial={{ y: -10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.1 }}
-                  className="text-xl text-cyan-400 font-bold"
+                  className="text-base sm:text-xl text-cyan-400 font-bold"
                 >
                   {scenario.title}
                 </motion.p>
@@ -223,16 +223,16 @@ export default function ScorePage() {
                 className="text-center mb-8"
               >
                 <div className="inline-block">
-                  <div className="text-8xl mb-4">{feedback.emoji}</div>
+                  <div className="text-6xl sm:text-8xl mb-4">{feedback.emoji}</div>
                   <div
-                    className={`text-6xl md:text-8xl font-black ${feedback.color} mb-2`}
+                    className={`text-5xl sm:text-6xl md:text-8xl font-black ${feedback.color} mb-2`}
                     style={{
                       textShadow: "0 0 20px currentColor",
                     }}
                   >
                     {currentResult.score}%
                   </div>
-                  <div className="text-2xl md:text-3xl font-bold text-white">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
                     {feedback.title}
                   </div>
                 </div>
@@ -243,9 +243,9 @@ export default function ScorePage() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="bg-gradient-to-r from-slate-700/50 to-slate-600/50 rounded-xl p-6 mb-8 border-2 border-slate-500/30"
+                className="bg-gradient-to-r from-slate-700/50 to-slate-600/50 rounded-xl p-4 sm:p-6 mb-8 border-2 border-slate-500/30"
               >
-                <p className="text-white text-center text-lg italic">
+                <p className="text-white text-center text-base sm:text-lg italic">
                   {feedback.message}
                 </p>
               </motion.div>
@@ -257,7 +257,7 @@ export default function ScorePage() {
                   initial={{ x: -50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.6 }}
-                  className="bg-gradient-to-br from-purple-900/30 to-purple-700/30 rounded-xl p-6 border-2 border-purple-500/40"
+                  className="bg-gradient-to-br from-purple-900/30 to-purple-700/30 rounded-xl p-4 sm:p-6 border-2 border-purple-500/40"
                 >
                   <h3 className="text-xl font-bold text-purple-300 mb-4 flex items-center gap-2">
                     🔥 Your Metabolism
@@ -288,7 +288,7 @@ export default function ScorePage() {
                   initial={{ x: 50, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 0.7 }}
-                  className="bg-gradient-to-br from-cyan-900/30 to-cyan-700/30 rounded-xl p-6 border-2 border-cyan-500/40"
+                  className="bg-gradient-to-br from-cyan-900/30 to-cyan-700/30 rounded-xl p-4 sm:p-6 border-2 border-cyan-500/40"
                 >
                   <h3 className="text-xl font-bold text-cyan-300 mb-4 flex items-center gap-2">
                     🍽️ Your Portion Choices
@@ -344,7 +344,7 @@ export default function ScorePage() {
                 transition={{ delay: 0.8 }}
                 className="mb-8"
               >
-                <h3 className="text-2xl font-bold text-white mb-4 text-center">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 text-center">
                   📊 Food Breakdown
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -404,13 +404,13 @@ export default function ScorePage() {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 1.2 }}
-                  className="mb-8 bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-xl p-6 border-2 border-yellow-500/40"
+                  className="mb-8 bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-xl p-4 sm:p-6 border-2 border-yellow-500/40"
                 >
-                  <h3 className="text-2xl font-bold text-yellow-300 mb-4 text-center">
+                  <h3 className="text-xl sm:text-2xl font-bold text-yellow-300 mb-4 text-center">
                     🏆 Overall Progress
                   </h3>
                   <div className="text-center">
-                    <div className="text-5xl font-black text-yellow-300 mb-2">
+                    <div className="text-4xl sm:text-5xl font-black text-yellow-300 mb-2">
                       {Math.round(overallScore)}%
                     </div>
                     <div className="text-white/70">
@@ -451,7 +451,7 @@ export default function ScorePage() {
                 onClick={handleContinue}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full py-5 rounded-xl font-black text-xl md:text-2xl transition-all relative overflow-hidden shadow-lg bg-gradient-to-r from-green-400 via-emerald-500 to-green-400 text-white cursor-pointer"
+                  className="w-full py-4 sm:py-5 rounded-xl font-black text-base sm:text-xl md:text-2xl transition-all relative overflow-hidden shadow-lg bg-gradient-to-r from-green-400 via-emerald-500 to-green-400 text-white cursor-pointer"
                 style={{
                   boxShadow:
                     "0 0 30px rgba(34, 197, 94, 0.6), 0 0 60px rgba(34, 197, 94, 0.3)",

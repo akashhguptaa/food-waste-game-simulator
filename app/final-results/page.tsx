@@ -130,7 +130,7 @@ export default function FinalResultsPage() {
   const rank = getRank(overallScore);
 
   return (
-    <div className="relative min-h-screen bg-[#0a0e27] overflow-hidden flex items-center justify-center p-4">
+    <div className="relative min-h-screen bg-[#0a0e27] overflow-hidden flex items-start md:items-center justify-center px-3 py-16 sm:p-4">
       {/* Space Background */}
       {mounted && (
         <div className="absolute inset-0">
@@ -160,7 +160,7 @@ export default function FinalResultsPage() {
 
       {/* Floating Emojis */}
       <motion.div
-        className="absolute top-12 left-12 text-8xl z-20 drop-shadow-2xl"
+        className="hidden sm:block absolute top-12 left-12 text-6xl md:text-8xl z-20 drop-shadow-2xl"
         animate={{ y: [0, -20, 0], rotate: [-5, 5, -5] }}
         transition={{ duration: 4, repeat: Infinity }}
       >
@@ -168,7 +168,7 @@ export default function FinalResultsPage() {
       </motion.div>
 
       <motion.div
-        className="absolute top-12 right-12 text-8xl z-20 drop-shadow-2xl"
+        className="hidden sm:block absolute top-12 right-12 text-6xl md:text-8xl z-20 drop-shadow-2xl"
         animate={{ y: [0, -15, 0], rotate: [5, -5, 5] }}
         transition={{ duration: 3.5, repeat: Infinity, delay: 0.5 }}
       >
@@ -189,7 +189,7 @@ export default function FinalResultsPage() {
           <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-red-500 rounded-full shadow-lg shadow-red-500/50"></div>
 
           <div className="bg-gradient-to-b from-slate-800 to-slate-900 rounded-[1.3rem] p-1">
-            <div className="bg-[#1a1f3a] rounded-[1.2rem] p-8 md:p-12 relative overflow-hidden max-h-[90vh] overflow-y-auto">
+            <div className="bg-[#1a1f3a] rounded-[1.2rem] p-4 sm:p-6 md:p-12 relative overflow-hidden max-h-[92vh] overflow-y-auto">
               <div className="absolute inset-0 bg-[linear-gradient(0deg,transparent_50%,rgba(255,255,255,0.03)_50%)] bg-[length:100%_4px] pointer-events-none"></div>
 
               {/* Header */}
@@ -197,7 +197,7 @@ export default function FinalResultsPage() {
                 <motion.h1
                   initial={{ y: -20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  className="text-5xl md:text-7xl font-black mb-4"
+                  className="text-3xl sm:text-5xl md:text-7xl font-black mb-4"
                   style={{
                     color: "#d4a574",
                     textShadow:
@@ -216,19 +216,19 @@ export default function FinalResultsPage() {
                 transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
                 className="text-center mb-8"
               >
-                <div className="text-8xl mb-4">{rank.emoji}</div>
+                <div className="text-6xl sm:text-8xl mb-4">{rank.emoji}</div>
                 <div
-                  className={`text-7xl md:text-9xl font-black ${rank.color} mb-4`}
+                  className={`text-5xl sm:text-7xl md:text-9xl font-black ${rank.color} mb-4`}
                   style={{
                     textShadow: "0 0 30px currentColor",
                   }}
                 >
                   {Math.round(overallScore)}%
                 </div>
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
                   {rank.title}
                 </div>
-                <div className="text-lg text-white/70">
+                <div className="text-sm sm:text-lg text-white/70">
                   Overall Performance Across {allResults.length} Scenarios
                 </div>
               </motion.div>
@@ -239,7 +239,7 @@ export default function FinalResultsPage() {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5 }}
-                  className="bg-gradient-to-br from-purple-900/30 to-purple-700/30 rounded-xl p-6 border-2 border-purple-500/40 text-center"
+                  className="bg-gradient-to-br from-purple-900/30 to-purple-700/30 rounded-xl p-4 sm:p-6 border-2 border-purple-500/40 text-center"
                 >
                   <div className="text-3xl mb-2">🔥</div>
                   <div className="text-sm text-white/60 mb-1">Your BMR</div>
@@ -253,7 +253,7 @@ export default function FinalResultsPage() {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.6 }}
-                  className="bg-gradient-to-br from-cyan-900/30 to-cyan-700/30 rounded-xl p-6 border-2 border-cyan-500/40 text-center"
+                  className="bg-gradient-to-br from-cyan-900/30 to-cyan-700/30 rounded-xl p-4 sm:p-6 border-2 border-cyan-500/40 text-center"
                 >
                   <div className="text-3xl mb-2">🍽️</div>
                   <div className="text-sm text-white/60 mb-1">
@@ -271,7 +271,7 @@ export default function FinalResultsPage() {
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.7 }}
-                  className="bg-gradient-to-br from-green-900/30 to-green-700/30 rounded-xl p-6 border-2 border-green-500/40 text-center"
+                  className="bg-gradient-to-br from-green-900/30 to-green-700/30 rounded-xl p-4 sm:p-6 border-2 border-green-500/40 text-center"
                 >
                   <div className="text-3xl mb-2">✅</div>
                   <div className="text-sm text-white/60 mb-1">
@@ -291,7 +291,7 @@ export default function FinalResultsPage() {
                 transition={{ delay: 0.8 }}
                 className="mb-8"
               >
-                <h2 className="text-3xl font-bold text-white mb-6 text-center">
+                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 text-center">
                   📊 Your Journey
                 </h2>
                 <div className="space-y-4">
@@ -305,19 +305,19 @@ export default function FinalResultsPage() {
                         initial={{ x: -50, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
                         transition={{ delay: 0.9 + index * 0.1 }}
-                        className="bg-slate-800/50 rounded-xl p-6 border border-slate-600/30"
+                        className="bg-slate-800/50 rounded-xl p-4 sm:p-6 border border-slate-600/30"
                       >
                         <div className="flex items-center justify-between flex-wrap gap-4">
-                          <div className="flex items-center gap-4">
-                            <div className="text-5xl">
+                          <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                            <div className="text-4xl sm:text-5xl shrink-0">
                               {scenario?.emoji || "🍽️"}
                             </div>
-                            <div>
-                              <div className="text-xl font-bold text-white">
+                            <div className="min-w-0">
+                              <div className="text-lg sm:text-xl font-bold text-white">
                                 Scenario {result.scenarioId}:{" "}
                                 {result.scenarioTitle}
                               </div>
-                              <div className="text-sm text-white/60">
+                              <div className="text-xs sm:text-sm text-white/60">
                                 {result.userCalories} cal chosen vs{" "}
                                 {result.optimalCalories} cal optimal
                               </div>
@@ -325,7 +325,7 @@ export default function FinalResultsPage() {
                           </div>
                           <div className="flex items-center gap-4">
                             <div
-                              className={`text-4xl font-black ${
+                              className={`text-3xl sm:text-4xl font-black ${
                                 result.score >= 85
                                   ? "text-green-400"
                                   : result.score >= 70
@@ -355,9 +355,9 @@ export default function FinalResultsPage() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 1.2 }}
-                className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-xl p-8 border-2 border-yellow-500/40 mb-8"
+                className="bg-gradient-to-r from-yellow-900/30 to-orange-900/30 rounded-xl p-4 sm:p-8 border-2 border-yellow-500/40 mb-8"
               >
-                <h3 className="text-2xl font-bold text-yellow-300 mb-4 text-center">
+                <h3 className="text-xl sm:text-2xl font-bold text-yellow-300 mb-4 text-center">
                   💡 What You Learned
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-white">
@@ -410,7 +410,7 @@ export default function FinalResultsPage() {
                   onClick={handlePlayAgain}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="py-5 rounded-xl font-black text-xl md:text-2xl transition-all relative overflow-hidden shadow-lg bg-gradient-to-r from-green-400 via-emerald-500 to-green-400 text-white cursor-pointer"
+                  className="py-4 sm:py-5 rounded-xl font-black text-base sm:text-xl md:text-2xl transition-all relative overflow-hidden shadow-lg bg-gradient-to-r from-green-400 via-emerald-500 to-green-400 text-white cursor-pointer"
                   style={{
                     boxShadow:
                       "0 0 30px rgba(34, 197, 94, 0.6), 0 0 60px rgba(34, 197, 94, 0.3)",
@@ -435,7 +435,7 @@ export default function FinalResultsPage() {
                   onClick={() => router.push("/")}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="py-5 rounded-xl font-black text-xl md:text-2xl transition-all relative overflow-hidden shadow-lg bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 text-white cursor-pointer"
+                  className="py-4 sm:py-5 rounded-xl font-black text-base sm:text-xl md:text-2xl transition-all relative overflow-hidden shadow-lg bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 text-white cursor-pointer"
                   style={{
                     boxShadow:
                       "0 0 30px rgba(6, 182, 212, 0.6), 0 0 60px rgba(6, 182, 212, 0.3)",

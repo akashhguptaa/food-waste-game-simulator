@@ -54,7 +54,7 @@ const StyledText = ({ text }: { text: string }) => {
           return (
             <span
               key={key}
-              className="text-yellow-300 font-bold text-xl animate-pulse"
+              className="text-yellow-300 font-bold text-base md:text-xl animate-pulse"
             >
               {content}
             </span>
@@ -63,7 +63,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<marathon>")) {
           const content = part.replace(/<\/?marathon>/g, "");
           return (
-            <span key={key} className="text-orange-400 font-black text-xl">
+            <span key={key} className="text-orange-400 font-black text-base md:text-xl">
               {content}
             </span>
           );
@@ -71,7 +71,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<starving>")) {
           const content = part.replace(/<\/?starving>/g, "");
           return (
-            <span key={key} className="text-red-400 font-bold text-lg">
+            <span key={key} className="text-red-400 font-bold text-base md:text-lg">
               {content}
             </span>
           );
@@ -87,7 +87,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<actually>")) {
           const content = part.replace(/<\/?actually>/g, "");
           return (
-            <span key={key} className="text-cyan-300 font-bold text-lg">
+            <span key={key} className="text-cyan-300 font-bold text-base md:text-lg">
               {content}
             </span>
           );
@@ -95,7 +95,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<exam>")) {
           const content = part.replace(/<\/?exam>/g, "");
           return (
-            <span key={key} className="text-purple-400 font-black text-xl">
+            <span key={key} className="text-purple-400 font-black text-base md:text-xl">
               {content}
             </span>
           );
@@ -103,7 +103,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<fried>")) {
           const content = part.replace(/<\/?fried>/g, "");
           return (
-            <span key={key} className="text-red-400 font-bold text-lg">
+            <span key={key} className="text-red-400 font-bold text-base md:text-lg">
               {content}
             </span>
           );
@@ -119,7 +119,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<friday>")) {
           const content = part.replace(/<\/?friday>/g, "");
           return (
-            <span key={key} className="text-yellow-300 font-bold text-xl">
+            <span key={key} className="text-yellow-300 font-bold text-base md:text-xl">
               {content}
             </span>
           );
@@ -127,7 +127,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<movie>")) {
           const content = part.replace(/<\/?movie>/g, "");
           return (
-            <span key={key} className="text-purple-400 font-black text-xl">
+            <span key={key} className="text-purple-400 font-black text-base md:text-xl">
               {content}
             </span>
           );
@@ -143,7 +143,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<hiking>")) {
           const content = part.replace(/<\/?hiking>/g, "");
           return (
-            <span key={key} className="text-green-400 font-black text-xl">
+            <span key={key} className="text-green-400 font-black text-base md:text-xl">
               {content}
             </span>
           );
@@ -159,7 +159,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<campfire>")) {
           const content = part.replace(/<\/?campfire>/g, "");
           return (
-            <span key={key} className="text-orange-400 font-black text-xl">
+            <span key={key} className="text-orange-400 font-black text-base md:text-xl">
               {content}
             </span>
           );
@@ -167,7 +167,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<carried>")) {
           const content = part.replace(/<\/?carried>/g, "");
           return (
-            <span key={key} className="text-red-400 font-bold text-lg">
+            <span key={key} className="text-red-400 font-bold text-base md:text-lg">
               {content}
             </span>
           );
@@ -175,7 +175,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<birthday>")) {
           const content = part.replace(/<\/?birthday>/g, "");
           return (
-            <span key={key} className="text-pink-400 font-black text-xl">
+            <span key={key} className="text-pink-400 font-black text-base md:text-xl">
               {content}
             </span>
           );
@@ -183,7 +183,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<celebration>")) {
           const content = part.replace(/<\/?celebration>/g, "");
           return (
-            <span key={key} className="text-yellow-300 font-bold text-lg">
+            <span key={key} className="text-yellow-300 font-bold text-base md:text-lg">
               {content}
             </span>
           );
@@ -199,7 +199,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<wisely>")) {
           const content = part.replace(/<\/?wisely>/g, "");
           return (
-            <span key={key} className="text-cyan-300 font-bold text-lg">
+            <span key={key} className="text-cyan-300 font-bold text-base md:text-lg">
               {content}
             </span>
           );
@@ -207,7 +207,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<lazy>")) {
           const content = part.replace(/<\/?lazy>/g, "");
           return (
-            <span key={key} className="text-blue-300 font-black text-xl">
+            <span key={key} className="text-blue-300 font-black text-base md:text-xl">
               {content}
             </span>
           );
@@ -215,7 +215,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<nothing>")) {
           const content = part.replace(/<\/?nothing>/g, "");
           return (
-            <span key={key} className="text-gray-400 font-bold text-lg">
+            <span key={key} className="text-gray-400 font-bold text-base md:text-lg">
               {content}
             </span>
           );
@@ -231,7 +231,7 @@ const StyledText = ({ text }: { text: string }) => {
         if (part.includes("<really>")) {
           const content = part.replace(/<\/?really>/g, "");
           return (
-            <span key={key} className="text-yellow-300 font-bold text-lg">
+            <span key={key} className="text-yellow-300 font-bold text-base md:text-lg">
               {content}
             </span>
           );
@@ -335,7 +335,7 @@ export default function ScenarioGamePage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-[#0a0e27] overflow-hidden flex items-center justify-center p-4">
+    <div className="relative min-h-screen bg-[#0a0e27] overflow-hidden flex items-start md:items-center justify-center px-3 py-16 sm:p-4">
       {/* Space Background with Stars */}
       <div className="absolute inset-0">
         {particles.map((particle) => (
@@ -364,7 +364,7 @@ export default function ScenarioGamePage() {
 
       {/* Floating Food Decorations */}
       <motion.div
-        className="absolute top-12 left-12 text-6xl z-20 drop-shadow-2xl"
+        className="hidden sm:block absolute top-12 left-12 text-4xl md:text-6xl z-20 drop-shadow-2xl"
         animate={{ y: [0, -20, 0], rotate: [-5, 5, -5] }}
         transition={{ duration: 4, repeat: Infinity }}
       >
@@ -372,7 +372,7 @@ export default function ScenarioGamePage() {
       </motion.div>
 
       <motion.div
-        className="absolute top-12 right-12 text-6xl z-20 drop-shadow-2xl"
+        className="hidden sm:block absolute top-12 right-12 text-4xl md:text-6xl z-20 drop-shadow-2xl"
         animate={{ y: [0, -15, 0], rotate: [5, -5, 5] }}
         transition={{ duration: 3.5, repeat: Infinity, delay: 0.5 }}
       >
@@ -380,7 +380,7 @@ export default function ScenarioGamePage() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-20 left-8 text-7xl z-20 drop-shadow-2xl"
+        className="hidden sm:block absolute bottom-20 left-8 text-5xl md:text-7xl z-20 drop-shadow-2xl"
         animate={{ y: [0, -12, 0], rotate: [-3, 3, -3] }}
         transition={{ duration: 3.8, repeat: Infinity, delay: 0.3 }}
       >
@@ -388,7 +388,7 @@ export default function ScenarioGamePage() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-20 right-12 text-7xl z-20 drop-shadow-2xl"
+        className="hidden sm:block absolute bottom-20 right-12 text-5xl md:text-7xl z-20 drop-shadow-2xl"
         animate={{ y: [0, -18, 0], rotate: [3, -3, 3] }}
         transition={{ duration: 3.6, repeat: Infinity, delay: 0.2 }}
       >
@@ -413,13 +413,13 @@ export default function ScenarioGamePage() {
               <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-red-500 rounded-full shadow-lg shadow-red-500/50"></div>
 
               <div className="bg-gradient-to-b from-slate-800 to-slate-900 rounded-[1.3rem] p-1">
-                <div className="bg-[#1a1f3a] rounded-[1.2rem] p-6 md:p-8 relative overflow-hidden">
+                <div className="bg-[#1a1f3a] rounded-[1.2rem] p-4 sm:p-6 md:p-8 relative overflow-hidden">
                   <div className="absolute inset-0 bg-[linear-gradient(0deg,transparent_50%,rgba(255,255,255,0.03)_50%)] bg-[length:100%_4px] pointer-events-none"></div>
 
                   {/* Story Content */}
                   <motion.div className="text-center space-y-5">
                     <motion.h1
-                      className="text-2xl md:text-3xl font-black"
+                      className="text-xl sm:text-2xl md:text-3xl font-black"
                       style={{
                         color: "#d4a574",
                         textShadow:
@@ -434,7 +434,7 @@ export default function ScenarioGamePage() {
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.2 }}
-                      className="text-2xl md:text-4xl font-bold text-cyan-400"
+                      className="text-xl sm:text-2xl md:text-4xl font-bold text-cyan-400"
                     >
                       {scenario.title}
                     </motion.h2>
@@ -443,7 +443,7 @@ export default function ScenarioGamePage() {
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.4 }}
-                      className="text-4xl"
+                      className="text-3xl sm:text-4xl"
                     >
                       🏃‍♂️💨
                     </motion.div>
@@ -455,8 +455,8 @@ export default function ScenarioGamePage() {
                       className="space-y-4"
                     >
                       <div className="text-left px-2">
-                        <p className="text-base md:text-lg text-white/90 leading-relaxed">
-                          <span className="text-cyan-400 font-black text-lg">
+                        <p className="text-sm sm:text-base md:text-lg text-white/90 leading-relaxed">
+                          <span className="text-cyan-400 font-black text-base md:text-lg">
                             Setting:
                           </span>{" "}
                           <StyledText text={scenario.setting} />
@@ -464,8 +464,8 @@ export default function ScenarioGamePage() {
                       </div>
 
                       <div className="bg-gradient-to-r from-orange-900/40 via-orange-800/30 to-orange-900/40 rounded-xl p-4 border-2 border-orange-500/40 shadow-lg shadow-orange-500/20">
-                        <p className="text-base md:text-lg text-white/95 leading-relaxed">
-                          <span className="text-orange-300 font-black text-lg">
+                        <p className="text-sm sm:text-base md:text-lg text-white/95 leading-relaxed">
+                          <span className="text-orange-300 font-black text-base md:text-lg">
                             Challenge:
                           </span>{" "}
                           <StyledText text={scenario.challenge} />
@@ -477,7 +477,7 @@ export default function ScenarioGamePage() {
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.8 }}
-                      className="flex justify-center gap-3 text-3xl"
+                      className="flex justify-center gap-2 sm:gap-3 text-2xl sm:text-3xl"
                     >
                       {scenario.foods.map((food, i) => (
                         <motion.span
@@ -501,7 +501,7 @@ export default function ScenarioGamePage() {
                       onClick={() => setShowStory(false)}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="mt-6 px-10 py-4 bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 text-white font-black text-lg rounded-xl shadow-lg relative overflow-hidden cursor-pointer"
+                      className="mt-6 w-full sm:w-auto px-6 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 text-white font-black text-base sm:text-lg rounded-xl shadow-lg relative overflow-hidden cursor-pointer"
                       style={{
                         boxShadow:
                           "0 0 30px rgba(6, 182, 212, 0.6), 0 0 60px rgba(6, 182, 212, 0.3)",
@@ -538,14 +538,14 @@ export default function ScenarioGamePage() {
               <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-red-500 rounded-full shadow-lg shadow-red-500/50"></div>
 
               <div className="bg-gradient-to-b from-slate-800 to-slate-900 rounded-[1.3rem] p-1">
-                <div className="bg-[#1a1f3a] rounded-[1.2rem] p-8 md:p-12 relative overflow-hidden max-h-[90vh] overflow-y-auto">
+                <div className="bg-[#1a1f3a] rounded-[1.2rem] p-4 sm:p-6 md:p-12 relative overflow-hidden max-h-[92vh] overflow-y-auto">
                   <div className="absolute inset-0 bg-[linear-gradient(0deg,transparent_50%,rgba(255,255,255,0.03)_50%)] bg-[length:100%_4px] pointer-events-none"></div>
 
                   {/* Game Content */}
                   <div className="space-y-6">
                     <div className="text-center mb-8">
                       <motion.h1
-                        className="text-3xl md:text-5xl font-black mb-2"
+                        className="text-2xl sm:text-3xl md:text-5xl font-black mb-2"
                         style={{
                           color: "#d4a574",
                           textShadow:
@@ -569,12 +569,12 @@ export default function ScenarioGamePage() {
                           initial={{ x: -50, opacity: 0 }}
                           animate={{ x: 0, opacity: 1 }}
                           transition={{ delay: index * 0.1 }}
-                          className="bg-slate-900/50 rounded-xl p-6 border-2 border-slate-700 hover:border-cyan-500/50 transition-all"
+                          className="bg-slate-900/50 rounded-xl p-4 sm:p-6 border-2 border-slate-700 hover:border-cyan-500/50 transition-all"
                         >
-                          <div className="flex items-center justify-between mb-4">
-                            <div className="flex items-center gap-4">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+                            <div className="flex items-start sm:items-center gap-3 sm:gap-4 min-w-0">
                               <motion.span
-                                className="text-6xl"
+                                className="text-5xl sm:text-6xl shrink-0"
                                 animate={{ rotate: [0, 10, -10, 0] }}
                                 transition={{
                                   duration: 2,
@@ -586,7 +586,7 @@ export default function ScenarioGamePage() {
                               </motion.span>
                               <div>
                                 <div className="flex items-center gap-2">
-                                  <h3 className="text-2xl font-bold text-white">
+                                  <h3 className="text-xl sm:text-2xl font-bold text-white">
                                     {food.name}
                                   </h3>
                                   <button
@@ -601,7 +601,7 @@ export default function ScenarioGamePage() {
                                   >
                                     <svg
                                       xmlns="http://www.w3.org/2000/svg"
-                                      className="h-5 w-5"
+                                      className="h-4 w-4 sm:h-5 sm:w-5"
                                       viewBox="0 0 20 20"
                                       fill="currentColor"
                                     >
@@ -621,7 +621,7 @@ export default function ScenarioGamePage() {
                                     <motion.div
                                       initial={{ opacity: 0, y: -10 }}
                                       animate={{ opacity: 1, y: 0 }}
-                                      className="mt-2 bg-cyan-900/50 border border-cyan-500/30 rounded-lg p-3 text-sm"
+                                      className="mt-2 bg-cyan-900/50 border border-cyan-500/30 rounded-lg p-3 text-xs sm:text-sm"
                                     >
                                       <div className="text-cyan-300 font-bold mb-1">
                                         📏 Portion Guide:
@@ -641,8 +641,8 @@ export default function ScenarioGamePage() {
                                   )}
                               </div>
                             </div>
-                            <div className="text-right">
-                              <div className="text-4xl font-black text-cyan-400">
+                            <div className="text-right self-end sm:self-auto">
+                              <div className="text-3xl sm:text-4xl font-black text-cyan-400">
                                 {selections[food.name]}
                               </div>
                               <div className="text-sm text-white/60">

@@ -17,7 +17,7 @@ export default function GlobalAudioControl() {
   if (!mounted) return null;
 
   return (
-    <div className="fixed top-6 right-6 z-50 flex gap-3">
+    <div className="fixed top-3 right-3 sm:top-6 sm:right-6 z-50 flex gap-2 sm:gap-3">
       {/* Mute/Unmute Button */}
       <motion.button
         whileHover={{ scale: 1.1 }}
@@ -25,9 +25,9 @@ export default function GlobalAudioControl() {
         onClick={toggleMute}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
-        className="relative bg-gradient-to-br from-slate-700 via-slate-600 to-slate-800 p-3 rounded-full shadow-lg border-2 border-slate-500 hover:border-cyan-400 transition-colors"
+        className="relative bg-gradient-to-br from-slate-700 via-slate-600 to-slate-800 p-2.5 sm:p-3 rounded-full shadow-lg border-2 border-slate-500 hover:border-cyan-400 transition-colors"
       >
-        <div className="text-3xl">{isMuted ? "🔇" : "🔊"}</div>
+        <div className="text-2xl sm:text-3xl">{isMuted ? "🔇" : "🔊"}</div>
 
         {/* Red corner light */}
         <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full shadow-lg shadow-red-500/50 animate-pulse"></div>
@@ -52,9 +52,9 @@ export default function GlobalAudioControl() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={toggleTrack}
-        className="relative bg-gradient-to-br from-purple-700 via-purple-600 to-purple-800 p-3 rounded-full shadow-lg border-2 border-purple-500 hover:border-cyan-400 transition-colors"
+        className="relative bg-gradient-to-br from-purple-700 via-purple-600 to-purple-800 p-2.5 sm:p-3 rounded-full shadow-lg border-2 border-purple-500 hover:border-cyan-400 transition-colors"
       >
-        <div className="text-2xl">{currentTrack === 0 ? "🎵" : "🎶"}</div>
+        <div className="text-xl sm:text-2xl">{currentTrack === 0 ? "🎵" : "🎶"}</div>
 
         {/* Green corner light for active */}
         {isPlaying && (
