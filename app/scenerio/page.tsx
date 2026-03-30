@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import scenariosData from "@/data/scenarios.json";
 
 export default function ScenarioPage() {
   const [playerData, setPlayerData] = useState<any>(null);
+  const [selectedScenarios, setSelectedScenarios] = useState<any[]>([]);
   const particles = Array.from({ length: 50 }, (_, i) => ({
     id: i,
     left: `${(i * 37) % 100}%`,
@@ -18,6 +20,19 @@ export default function ScenarioPage() {
     const data = localStorage.getItem("playerData");
     if (data) {
       setPlayerData(JSON.parse(data));
+    }
+
+    // Get selected scenario IDs from localStorage
+    const selectedIds = localStorage.getItem("selectedScenarioIds");
+    if (selectedIds) {
+      const ids = JSON.parse(selectedIds);
+      const scenarios = ids.map((id: number) => 
+        scenariosData.scenarios.find((s) => s.id === id)
+      ).filter(Boolean);
+      setSelectedScenarios(scenarios);
+    } else {
+      // Fallback: use first 3 scenarios if none selected
+      setSelectedScenarios(scenariosData.scenarios.slice(0, 3));
     }
   }, []);
 
@@ -201,7 +216,11 @@ export default function ScenarioPage() {
 
                 {/* Continue Button */}
                 <motion.button
-                  onClick={() => (window.location.href = "/scenerio/1")}
+                  onClick={() => {
+                    if (selectedScenarios.length > 0) {
+                      window.location.href = `/scenerio/${selectedScenarios[0].id}`;
+                    }
+                  }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="mt-8 w-full sm:w-auto px-6 sm:px-12 py-4 sm:py-5 bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 text-white font-black text-base sm:text-xl rounded-xl shadow-lg relative overflow-hidden cursor-pointer"

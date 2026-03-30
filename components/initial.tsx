@@ -5,6 +5,16 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import scenariosData from "@/data/scenarios.json";
 
+// Fisher-Yates shuffle algorithm to randomize array
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 export default function InitialPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -57,6 +67,15 @@ export default function InitialPage() {
       localStorage.setItem("playerData", JSON.stringify(formData));
 
       try {
+        // Randomly select 3 scenarios from all available scenarios
+        const allScenarios = scenariosData.scenarios;
+        const shuffledScenarios = shuffleArray(allScenarios);
+        const selectedScenarios = shuffledScenarios.slice(0, 3);
+        
+        // Store selected scenario IDs in localStorage for navigation
+        const selectedScenarioIds = selectedScenarios.map((s) => s.id);
+        localStorage.setItem("selectedScenarioIds", JSON.stringify(selectedScenarioIds));
+
         const res = await fetch("/api/db", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -67,7 +86,7 @@ export default function InitialPage() {
                 ...formData,
                 gmail: formData.email,
               },
-              scenarios: scenariosData.scenarios.map((s) => ({
+              scenarios: selectedScenarios.map((s) => ({
                 id: s.id,
                 title: s.title,
               })),

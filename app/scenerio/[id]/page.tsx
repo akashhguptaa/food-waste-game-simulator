@@ -259,6 +259,10 @@ export default function ScenarioGamePage() {
   const params = useParams();
   const router = useRouter();
   const scenarioId = parseInt(params.id as string);
+  
+  const [selectedScenarioIds, setSelectedScenarioIds] = useState<number[]>([]);
+  const [currentScenarioIndex, setCurrentScenarioIndex] = useState(0);
+  
   const scenario = scenariosData.scenarios.find(
     (s: Scenario) => s.id === scenarioId
   );
@@ -282,6 +286,21 @@ export default function ScenarioGamePage() {
       setPlayerData(JSON.parse(data));
     }
 
+    // Get selected scenario IDs from localStorage
+    const selectedIds = localStorage.getItem("selectedScenarioIds");
+    let ids: number[];
+    if (selectedIds) {
+      ids = JSON.parse(selectedIds);
+    } else {
+      // Fallback: use first 3 scenarios if none selected
+      ids = scenariosData.scenarios.slice(0, 3).map((s) => s.id);
+    }
+    setSelectedScenarioIds(ids);
+    
+    // Find current scenario index
+    const currentIndex = ids.indexOf(scenarioId);
+    setCurrentScenarioIndex(currentIndex >= 0 ? currentIndex : 0);
+
     if (scenario) {
       const initial: { [key: string]: number } = {};
       scenario.foods.forEach((food) => {
@@ -289,7 +308,7 @@ export default function ScenarioGamePage() {
       });
       setSelections(initial);
     }
-  }, [scenario]);
+  }, [scenario, scenarioId]);
 
   const handleSliderChange = (foodName: string, value: number) => {
     setSelections((prev) => ({ ...prev, [foodName]: value }));
@@ -320,9 +339,14 @@ export default function ScenarioGamePage() {
       JSON.stringify(result)
     );
 
-    // Navigate to score page after a delay
+    // Navigate to next scenario or final results after a delay
     setTimeout(() => {
-      router.push(`/score/${scenarioId}`);
+      if (currentScenarioIndex < selectedScenarioIds.length - 1) {
+        const nextScenarioId = selectedScenarioIds[currentScenarioIndex + 1];
+        router.push(`/scenerio/${nextScenarioId}`);
+      } else {
+        router.push("/final-results");
+      }
     }, 1500);
   };
 
@@ -737,7 +761,7 @@ export default function ScenarioGamePage() {
                       )}
                       <span className="relative z-10 flex items-center justify-center gap-3">
                         {submitted ? (
-                          scenarioId < scenariosData.scenarios.length ? (
+                          currentScenarioIndex < selectedScenarioIds.length - 1 ? (
                             <>🎉 LOADING NEXT SCENARIO...</>
                           ) : (
                             <>🏆 GAME COMPLETE!</>
@@ -750,7 +774,7 @@ export default function ScenarioGamePage() {
 
                     {/* Next Scenario Preview */}
                     {submitted &&
-                      scenarioId < scenariosData.scenarios.length && (
+                      currentScenarioIndex < selectedScenarioIds.length - 1 && (
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -759,8 +783,11 @@ export default function ScenarioGamePage() {
                           <p className="text-white/70 text-sm">
                             Next up:{" "}
                             <span className="text-cyan-400 font-bold">
-                              {scenariosData.scenarios[scenarioId].emoji}{" "}
-                              {scenariosData.scenarios[scenarioId].title}
+                              {(() => {
+                                const nextId = selectedScenarioIds[currentScenarioIndex + 1];
+                                const nextScenario = scenariosData.scenarios.find((s) => s.id === nextId);
+                                return nextScenario ? `${nextScenario.emoji} ${nextScenario.title}` : "";
+                              })()}
                             </span>
                           </p>
                         </motion.div>
