@@ -314,8 +314,8 @@ export default function ScenarioGamePage() {
     setSelections((prev) => ({ ...prev, [foodName]: value }));
   };
 
-  const handleSubmit = () => {
-    if (!scenario) return;
+  const handleSubmit = async () => {
+    if (!scenario || submitted) return;
 
     setSubmitted(true);
 
@@ -338,6 +338,28 @@ export default function ScenarioGamePage() {
       `scenario_${scenarioId}_result`,
       JSON.stringify(result)
     );
+
+    // Persist scenario score immediately since this flow skips /score/[id].
+    try {
+      const sessionId = localStorage.getItem("db_sessionId");
+      if (sessionId) {
+        await fetch("/api/db", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "saveScenarioScore",
+            payload: {
+              sessionId: Number(sessionId),
+              scenarioKey: `scenario_${scenario.id}`,
+              score,
+              maxScore: 100,
+            },
+          }),
+        });
+      }
+    } catch (err) {
+      console.error("[DB] Error saving scenario score:", err);
+    }
 
     // Navigate to next scenario or final results after a delay
     setTimeout(() => {
